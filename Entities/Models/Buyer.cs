@@ -7,13 +7,8 @@ namespace AuksionApp._12._04._2022
 {
     public class Buyer:IEntity
     {
-        private static int _id;
-
-        public int Id
-        {
-            get { return _id; }
-            set { _id = value; }
-        }
+        public int Id { get; set; }
+       
 
         private string _name;
 

@@ -2,7 +2,6 @@
 using DataAccess.Interface;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace DataAccess.Repositories
 {
@@ -10,31 +9,84 @@ namespace DataAccess.Repositories
     {
         public bool Create(Buyer entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                DataContext.Buyers.Add(entity);
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public bool Delete(Buyer entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                DataContext.Buyers.Remove(entity);
+                    return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
+
 
         public List<Buyer> GetAll(Predicate<Buyer> filter = null)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return filter == null ? DataContext.Buyers : DataContext.Buyers.FindAll(filter);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public Buyer GetOne(Predicate<Buyer> filter = null)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return filter == null ? DataContext.Buyers[0] :
+                     DataContext.Buyers.Find(filter);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool Update(Buyer entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Buyer isExist = GetOne(b => b.Name == entity.Name || b.Id == entity.Id);
+                isExist = entity;
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         public List<Product> AddProduct(Product product)
         {
-            return new List<Product>();
+            try
+            {
+                return new List<Product> { product };
+                
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

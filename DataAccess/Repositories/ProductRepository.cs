@@ -6,31 +6,73 @@ using System.Text;
 
 namespace DataAccess.Repositories
 {
-    internal class ProductRepository : IRepository<Product>
+    public class ProductRepository : IRepository<Product>
     {
         public bool Create(Product entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                DataContext.Products.Add(entity);
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public bool Delete(Product entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                DataContext.Products.Remove(entity);
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public List<Product> GetAll(Predicate<Product> filter = null)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return filter == null ? DataContext.Products : DataContext.Products.FindAll(filter);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public Product GetOne(Predicate<Product> filter = null)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return filter == null ? DataContext.Products[0] :
+                     DataContext.Products.Find(filter);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool Update(Product entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Product isExist = GetOne(p => p.Name == entity.Name || p.Id == entity.Id);
+                isExist = entity;
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
     }

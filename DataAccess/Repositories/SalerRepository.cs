@@ -2,7 +2,6 @@
 using DataAccess.Interface;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace DataAccess.Repositories
 {
@@ -10,27 +9,69 @@ namespace DataAccess.Repositories
     {
         public bool Create(Saler entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                DataContext.Salers.Add(entity);
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public bool Delete(Saler entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                DataContext.Salers.Remove(entity);
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public List<Saler> GetAll(Predicate<Saler> filter = null)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return filter == null ? DataContext.Salers : DataContext.Salers.FindAll(filter);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public Saler GetOne(Predicate<Saler> filter = null)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return filter == null ? DataContext.Salers[0] :
+                     DataContext.Salers.Find(filter);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool Update(Saler entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Saler isExist = GetOne(s => s.Name == entity.Name || s.Id == entity.Id);
+                isExist = entity;
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public List<Product> AddProduct(Product product)
