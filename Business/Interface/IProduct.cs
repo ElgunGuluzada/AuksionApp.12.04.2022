@@ -10,7 +10,7 @@ namespace Business.Interface
         Product Create(Product product);
         Product GetOne(Product product);
         List<Product> GetAll();
-        Product Update(Product product);
-        Product Sale(Product product);
+        Product Update(Product product, int id);
+        Product Sale(int id);
     }
 }

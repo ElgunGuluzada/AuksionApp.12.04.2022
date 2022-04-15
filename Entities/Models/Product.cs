@@ -6,7 +6,10 @@ namespace AuksionApp._12._04._2022
     public class Product : IEntity
     {
 
-        public int Id {get; set;}
+        public int Id { get; set; }
+
+        public int SalerId { get; set; }
+        public int BuyerId { get; set; }
 
         private string _name;
 
@@ -29,5 +32,12 @@ namespace AuksionApp._12._04._2022
             get { return _salers; }
             set { _salers = value; }
         }
+        List<Buyer> _buyer;
+        public List<Buyer> Buyer
+        {
+            get { return _buyer; }
+            set { _buyer = value; }
+        }
+
     }
 }

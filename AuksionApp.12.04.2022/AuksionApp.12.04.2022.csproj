@@ -6,4 +6,8 @@
     <RootNamespace>AuksionApp._12._04._2022</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Business\Business.csproj" />
+  </ItemGroup>
+
 </Project>

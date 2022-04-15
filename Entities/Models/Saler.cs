@@ -29,13 +29,6 @@ namespace AuksionApp._12._04._2022
             set { _age = value; }
         }
 
-        List<Saler> _salers;
-        public List<Saler> Salers
-        {
-            get { return _salers; }
-            set { _salers = value; }
-        }
-
         List<Buyer> _buyers;
         public List<Buyer> Buyer { 
             get { return _buyers; } 

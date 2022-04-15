@@ -1,14 +1,12 @@
 ﻿using Entities.Interface;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace AuksionApp._12._04._2022
 {
-    public class Buyer:IEntity
+    public class Buyer : IEntity
     {
         public int Id { get; set; }
-       
+        public int SalerId { get; set; }
 
         private string _name;
 
@@ -39,17 +37,12 @@ namespace AuksionApp._12._04._2022
             get { return _buyerPrice; }
             set { _buyerPrice = value; }
         }
-        List<Buyer> _buyers;
-        public List<Buyer> buyers { 
-            get { return _buyers; }
-            set { _buyers = value;}
-        }
-        public int ProductId { get; set; }
-
+      
         List<Product> _products;
-        public List<Product> Products {
-            get { return _products; } 
-            set { _products = value;}
+        public List<Product> Products
+        {
+            get { return _products; }
+            set { _products = value; }
         }
     }
 }

@@ -3,6 +3,7 @@ using Business.Interface;
 using DataAccess.Repositories;
 using System;
 using System.Collections.Generic;
+using Utilities;
 
 namespace Business.Services
 {
@@ -30,22 +31,37 @@ namespace Business.Services
 
         public List<Product> GetAll()
         {
-            throw new NotImplementedException();
+            return _productRepository.GetAll();
         }
 
         public Product GetOne(Product product)
         {
-            throw new NotImplementedException();
+            return _productRepository.GetOne(p => p.Id == product.Id);
         }
 
-        public Product Sale(Product product)
+        public Product Sale(int id)
         {
-            throw new NotImplementedException();
+            Product isExist = _productRepository.GetOne(p => p.Id == id);
+            if (isExist == null)
+            {
+                Notifications.Display(ConsoleColor.Red, ConsoleColor.DarkRed, "Error!! Mehsul yoxdu.");
+            }
+            _productRepository.Delete(isExist);
+            return isExist;
         }
 
-        public Product Update(Product product)
+        public Product Update(Product product, int id)
         {
-            throw new NotImplementedException();
+            Product isExist = _productRepository.GetOne(p => p.Id == id);
+            if (isExist == null)
+            {
+                Notifications.Display(ConsoleColor.Red, ConsoleColor.DarkRed, "Error");
+            }
+            isExist.Name=product.Name;
+            isExist.Price=product.Price;
+
+            _productRepository.Update(product);
+            return product;
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Utilities
 {
     public  class Notifications
     {
-        public void Display(ConsoleColor frgColor,ConsoleColor bckColor,string message)
+        public static void Display(ConsoleColor frgColor,ConsoleColor bckColor,string message)
         {
             Console.ForegroundColor = frgColor;
             Console.BackgroundColor = bckColor;

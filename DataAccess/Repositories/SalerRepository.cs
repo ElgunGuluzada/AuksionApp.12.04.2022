@@ -2,6 +2,7 @@
 using DataAccess.Interface;
 using System;
 using System.Collections.Generic;
+using Utilities;
 
 namespace DataAccess.Repositories
 {
@@ -16,7 +17,6 @@ namespace DataAccess.Repositories
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -30,7 +30,6 @@ namespace DataAccess.Repositories
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -51,7 +50,7 @@ namespace DataAccess.Repositories
         {
             try
             {
-                return filter == null ? DataContext.Salers[0] :
+                return filter == null ? null :
                      DataContext.Salers.Find(filter);
             }
             catch (Exception)
@@ -74,17 +73,66 @@ namespace DataAccess.Repositories
             }
         }
 
-        public List<Product> AddProduct(Product product)
+        //public List<Product> GetAllProducts(Predicate<Product> filter = null)
+        //{
+        //    try
+        //    {
+        //        return filter == null ? DataContext.Products : DataContext.Products.FindAll(filter);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
+
+        public Saler AddProduct(Product product)
         {
-            return new List<Product>();
+            try
+            {
+                Saler saler = DataContext.Salers.Find(s => s.Id == product.Id);
+                saler.Products = new List<Product>();
+                saler.Products.Add(product);
+                Notifications.Display(ConsoleColor.Green, ConsoleColor.DarkGreen, $"{product.Name} {saler.Name} terefinden elde edildi..");
+                return saler;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
-        public List<Product> SalerProduct(Product product)
+        public Saler SaleProduct(Product product)
         {
-            return new List<Product>();
+            try
+            {
+                {
+                    Saler saler = DataContext.Salers.Find(s => s.Id == product.Id);
+                    saler.Products = new List<Product>();
+                    saler.Products.Remove(product);
+                    Notifications.Display(ConsoleColor.Green, ConsoleColor.DarkGreen, $"{product.Name} {saler.Name} terefinden satildi..");
+                    return saler;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
-        public List<Buyer> AddBuyer(Buyer buyer)
+        public Saler AddBuyer(Buyer buyer)
         {
-            return new List<Buyer> { buyer };
+            try
+            {
+                {
+                    Saler saler = DataContext.Salers.Find(s => s.Id == buyer.Id);
+                    saler.Buyer = new List<Buyer>();
+                    saler.Buyer.Add(buyer);
+                    Notifications.Display(ConsoleColor.Green, ConsoleColor.DarkGreen, $"{buyer.Name} {saler.Name} in alicilari arasina qeyd olundu..");
+                    return saler;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

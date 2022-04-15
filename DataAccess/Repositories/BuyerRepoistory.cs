@@ -2,6 +2,7 @@
 using DataAccess.Interface;
 using System;
 using System.Collections.Generic;
+using Utilities;
 
 namespace DataAccess.Repositories
 {
@@ -52,7 +53,7 @@ namespace DataAccess.Repositories
         {
             try
             {
-                return filter == null ? DataContext.Buyers[0] :
+                return filter == null ? null :
                      DataContext.Buyers.Find(filter);
             }
             catch (Exception)
@@ -71,20 +72,34 @@ namespace DataAccess.Repositories
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
-        public List<Product> AddProduct(Product product)
+
+        //public List<Product> GetAllProducts(Predicate<Product> filter = null)
+        //{
+        //    try
+        //    {
+        //        return filter == null ? DataContext.Products : DataContext.Products.FindAll(filter);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
+
+        public Buyer AddProduct(Product product)
         {
             try
             {
-                return new List<Product> { product };
-                
+              Buyer buyer = DataContext.Buyers.Find(b=>b.Id==product.Id);
+                buyer.Products = new List<Product>();
+                buyer.Products.Add(product);
+                Notifications.Display(ConsoleColor.Green, ConsoleColor.DarkGreen, $"{product.Name} {buyer.Name} terefinden alindi..");
+                return buyer;
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

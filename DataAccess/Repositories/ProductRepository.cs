@@ -51,7 +51,7 @@ namespace DataAccess.Repositories
         {
             try
             {
-                return filter == null ? DataContext.Products[0] :
+                return filter == null ? null :
                      DataContext.Products.Find(filter);
             }
             catch (Exception)
@@ -74,6 +74,5 @@ namespace DataAccess.Repositories
                 throw;
             }
         }
-
     }
 }
