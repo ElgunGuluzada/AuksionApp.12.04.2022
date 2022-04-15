@@ -13,7 +13,7 @@ namespace Business.Services
             throw new NotImplementedException();
         }
 
-        public Product GetAll(Product product)
+        public List<Product> GetAll()
         {
             throw new NotImplementedException();
         }

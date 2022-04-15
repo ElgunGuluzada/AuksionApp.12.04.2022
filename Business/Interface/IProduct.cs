@@ -9,7 +9,7 @@ namespace Business.Interface
     {
         Product Create(Product product);
         Product GetOne(Product product);
-        Product GetAll(Product product);
+        List<Product> GetAll();
         Product Update(Product product);
         Product Sale(Product product);
     }

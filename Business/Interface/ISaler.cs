@@ -12,5 +12,8 @@ namespace Business.Interface
         List<Saler> GetAll();
         Saler Update(Saler buyer, int id);
         Saler Delete(int id);
+        List<Buyer> GetAllBuyers();
+        List<Product> GetAllProducts(string name);
+
     }
 }

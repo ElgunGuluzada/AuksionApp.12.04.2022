@@ -23,6 +23,16 @@ namespace Business.Services
             throw new NotImplementedException();
         }
 
+        public List<Buyer> GetAllBuyers()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Product> GetAllProducts(string name)
+        {
+            throw new NotImplementedException();
+        }
+
         public Saler GetOne(int id)
         {
             throw new NotImplementedException();

@@ -32,5 +32,9 @@ namespace DataAccess.Repositories
         {
             throw new NotImplementedException();
         }
+        public List<Product> AddProduct(Product product)
+        {
+            return new List<Product>();
+        }
     }
 }

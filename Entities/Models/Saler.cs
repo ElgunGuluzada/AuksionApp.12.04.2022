@@ -1,11 +1,9 @@
 ﻿using Entities.Interface;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace AuksionApp._12._04._2022
 {
-    public class Saler:IEntity
+    public class Saler : IEntity
     {
         private static int _id;
 
@@ -22,34 +20,39 @@ namespace AuksionApp._12._04._2022
             get { return _name; }
             set { _name = value; }
         }
+        private string _surname;
+
+        public string SurName
+        {
+            get { return _surname; }
+            set { _surname = value; }
+        }
+
+        private int _age;
+        public int Age
+        {
+            get { return _age; }
+            set { _age = value; }
+        }
 
         List<Saler> _salers;
-        public List<Saler> Salers { get { return _salers; } }
+        public List<Saler> Salers
+        {
+            get { return _salers; }
+            set { _salers = value; }
+        }
+
+        List<Buyer> _buyers;
+        public List<Buyer> Buyer { 
+            get { return _buyers; } 
+            set { _buyers = value; } 
+        }
 
         List<Product> _products;
-        public List<Product> Products { get { return _products; } }
-
-
-        public Saler(string name)
+        public List<Product> Products
         {
-            Name = name;
-            List<Product> products = new List<Product>();
-            _products = products;
-        }
-
-        public void AllSalers(Saler salers)
-        {
-            Salers.Add(salers);
-        }
-
-        public void AddProduct(Product product)
-        {
-            Products.Add(product);
-        }
-
-        public void SaleProduct(Product product)
-        {
-            Products.Remove(product);
+            get { return _products; }
+            set { _products = value; }
         }
     }
 }
