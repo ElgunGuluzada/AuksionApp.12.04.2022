@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace Utilities
 {
@@ -10,7 +11,7 @@ namespace Utilities
         {
             Console.ForegroundColor = frgColor;
             Console.BackgroundColor = bckColor;
-            Console.WriteLine(message);
+            Console.Write(message);
             Console.ResetColor();
         }
     }

@@ -10,6 +10,7 @@ namespace Business.Services
     public class ProductService : IProduct
     {
         public static int ProdId { get; set; }
+        public static int Count { get; set; }
         private ProductRepository _productRepository { get; set; }
         public ProductRepository ProductRepository
         {
@@ -25,6 +26,7 @@ namespace Business.Services
         {
             product.Id = ProdId;
             ProdId++;
+            Count++;
             _productRepository.Create(product);
             return product;
         }
@@ -34,9 +36,9 @@ namespace Business.Services
             return _productRepository.GetAll();
         }
 
-        public Product GetOne(Product product)
+        public Product GetOne(int id)
         {
-            return _productRepository.GetOne(p => p.Id == product.Id);
+            return _productRepository.GetOne(p => p.Id == id);
         }
 
         public Product Sale(int id)
@@ -47,6 +49,7 @@ namespace Business.Services
                 Notifications.Display(ConsoleColor.Red, ConsoleColor.DarkRed, "Error!! Mehsul yoxdu.");
             }
             _productRepository.Delete(isExist);
+            Count--;
             return isExist;
         }
 
