@@ -1,34 +1,34 @@
 ﻿using AuksionApp._12._04._2022;
-using DataAccess.Interface;
+using Business.Interface;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataAccess.Repositories
+namespace Business.Services
 {
-    internal class ProductRepository : IRepository<Product>
+    public class SalerService : ISaler
     {
-        public bool Create(Product entity)
+        public Saler Create(Saler buyer)
         {
             throw new NotImplementedException();
         }
 
-        public bool Delete(Product entity)
+        public Saler Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Product> GetAll(Predicate<Product> filter = null)
+        public List<Saler> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Product GetOne(Predicate<Product> filter = null)
+        public Saler GetOne(int id)
         {
             throw new NotImplementedException();
         }
 
-        public bool Update(Product entity)
+        public Saler Update(Saler buyer, int id)
         {
             throw new NotImplementedException();
         }

@@ -10,11 +10,10 @@ namespace DataAccess
         public static List<Buyer> Buyers { get; set; }
         public static List<Product> Products { get; set; }
 
-
         static DataContext()
         {
             Salers = new List<Saler>();
-            Buyers = new List<Buyer>(); 
+            Buyers = new List<Buyer>();
             Products = new List<Product>();
         }
     }
