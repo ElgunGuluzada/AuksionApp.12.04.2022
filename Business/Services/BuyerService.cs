@@ -36,11 +36,14 @@ namespace Business.Services
             Buyer isExist = _buyerRepository.GetOne(b => b.Id == id);
             if (isExist == null)
             {
-                Notifications.Display(ConsoleColor.White, ConsoleColor.DarkRed, "Error!! Buyer is Not Exist!\n");
+                Notifications.Display(ConsoleColor.DarkRed, ConsoleColor.White, $" The {id} is Not Exist in This List.\n Please Try Again! \n");
+                return null;
             }
-            _buyerRepository.Delete(isExist);
-            Count--;
-            return isExist;
+            else
+            {
+                _buyerRepository.Delete(isExist);
+                return isExist;
+            }
         }
 
         public List<Buyer> GetAll()
@@ -60,15 +63,40 @@ namespace Business.Services
 
         public Buyer Update(Buyer buyer, int id)
         {
-            Buyer isExist = _buyerRepository.GetOne(b=> b.Id == id);
+            Buyer isExist = _buyerRepository.GetOne(b => b.Id == id);
             if (isExist == null)
             {
-                Notifications.Display(ConsoleColor.Red, ConsoleColor.DarkRed, "Error");
+                Notifications.Display(ConsoleColor.DarkRed, ConsoleColor.White, $" The {id} is not Exist in this List.\n Please Try Again! \n");
+                return null;
             }
-            isExist.Name = buyer.Name;
-            isExist.SurName = buyer.SurName;
-            _buyerRepository.Update(buyer);
-            return buyer;
+            else
+            {
+                string oldName = isExist.Name;
+                string oldSurname = isExist.SurName;
+                int oldAge = isExist.Age;
+
+                string newName = buyer.Name;
+                string newSurName = buyer.SurName;
+                int newAge = buyer.Age;
+
+                if (oldAge < newAge)
+                {
+                    Notifications.Display(ConsoleColor.DarkGreen, ConsoleColor.White, $" The {oldName} change to {newName}, {oldSurname} change to {newSurName} and Age Up {oldAge} to {newAge} \n");
+                }
+                else if (oldAge > newAge)
+                {
+                    Notifications.Display(ConsoleColor.DarkGreen, ConsoleColor.White, $" The {oldName} change to {newName}, {oldSurname} change to {newSurName} and Age Down {oldAge} to {newAge} \n");
+                }
+                else
+                {
+                    Notifications.Display(ConsoleColor.DarkGreen, ConsoleColor.White, $" The {oldName} change to {newName}, {oldSurname} change to {newSurName} and Age Doesn't Change! \n");
+                }
+                isExist.Name = buyer.Name;
+                isExist.Age = buyer.Age;
+                _buyerRepository.Update(buyer);
+                return isExist;
+            }
+
         }
         public Buyer AddProduct(Product product, int id)
         {

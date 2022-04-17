@@ -15,6 +15,8 @@ namespace AuksionApp._12._04._2022
             ProductController productController = new ProductController();
             BuyerController buyerController = new BuyerController();
             SalerController salerController = new SalerController();
+
+            
             while (true)
             {
 

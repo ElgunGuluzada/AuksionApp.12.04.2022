@@ -10,7 +10,6 @@ namespace Business.Services
     public class ProductService : IProduct
     {
         public static int ProdId { get; set; }
-        public static int Count { get; set; }
         private ProductRepository _productRepository { get; set; }
         public ProductRepository ProductRepository
         {
@@ -27,7 +26,6 @@ namespace Business.Services
 
             product.Id = ProdId;
             ProdId++;
-            Count++;
             _productRepository.Create(product);
             return product;
         }
@@ -47,11 +45,14 @@ namespace Business.Services
             Product isExist = _productRepository.GetOne(p => p.Id == id);
             if (isExist == null)
             {
-                Notifications.Display(ConsoleColor.Red, ConsoleColor.DarkRed, "Error!! Product is Not Exist! \n");
+                Notifications.Display(ConsoleColor.DarkRed, ConsoleColor.White, $" The {id} is Not Exist in This List.\n Please Try Again! \n");
+                return null;
             }
-            _productRepository.Delete(isExist);
-            Count--;
-            return isExist;
+            else
+            {
+                _productRepository.Delete(isExist);
+                return isExist;
+            }
         }
 
         public Product Update(Product product, int id)
@@ -59,13 +60,35 @@ namespace Business.Services
             Product isExist = _productRepository.GetOne(p => p.Id == id);
             if (isExist == null)
             {
-                Notifications.Display(ConsoleColor.Red, ConsoleColor.DarkRed, "Error");
+                Notifications.Display(ConsoleColor.DarkRed, ConsoleColor.White, $" The {id} is not Exist in this List.\n Please Try Again! \n");
+                return null;
             }
-            isExist.Name=product.Name;
-            isExist.Price=product.Price;
+            else
+            {
+                string oldName = isExist.Name;
+                int oldPrice = isExist.Price;
 
-            _productRepository.Update(product);
-            return product;
+                string newName = product.Name;
+                int newPrice = product.Price;
+
+                if (oldPrice < newPrice)
+                {
+                    Notifications.Display(ConsoleColor.DarkGreen, ConsoleColor.White, $" The {oldName} change to {newName} and Price Up {oldPrice} to {newPrice} \n");
+                }
+                else if (oldPrice > newPrice)
+                {
+                    Notifications.Display(ConsoleColor.DarkGreen, ConsoleColor.White, $" The {oldName} change to {newName} and Price Down {oldPrice} to {newPrice} \n");
+                }
+                else
+                {
+                    Notifications.Display(ConsoleColor.DarkGreen, ConsoleColor.White, $" The {oldName} change to {newName} and Price Doesn't Change! \n");
+                }
+                isExist.Name = product.Name;
+                isExist.Price = product.Price;
+                _productRepository.Update(product);
+                return isExist;
+            }
+            
         }
     }
 }

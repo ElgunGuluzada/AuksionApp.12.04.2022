@@ -7,10 +7,10 @@ namespace Business.Interface
 {
     public interface ISaler
     {
-        Saler Create(Saler buyer);
+        Saler Create(Saler saler);
         Saler GetOne(int id);
         List<Saler> GetAll();
-        Saler Update(Saler buyer, int id);
+        Saler Update(Saler saler, int id);
         Saler Delete(int id);
         List<Buyer> GetAllBuyers();
         List<Product> GetAllProducts(string name);

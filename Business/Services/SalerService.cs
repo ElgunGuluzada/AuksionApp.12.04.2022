@@ -21,13 +21,13 @@ namespace Business.Services
         {
             _salerRepository= new SalerRepository();
         }
-        public Saler Create(Saler buyer)
+        public Saler Create(Saler saler)
         {
-            buyer.Id = SalerId;
+            saler.Id = SalerId;
             SalerId++;
             Count++;
-            _salerRepository.Create(buyer);
-            return buyer;
+            _salerRepository.Create(saler);
+            return saler;
         }
 
         public Saler Delete(int id)
@@ -35,11 +35,14 @@ namespace Business.Services
             Saler isExist = _salerRepository.GetOne(p => p.Id == id);
             if (isExist == null)
             {
-                Notifications.Display(ConsoleColor.Red, ConsoleColor.DarkRed, "Error!! Mehsul yoxdu.");
+                Notifications.Display(ConsoleColor.White, ConsoleColor.DarkRed, " Product not available \n Please Try Again! \n");
+                return null;
             }
-            _salerRepository.Delete(isExist);
-            Count--;
-            return isExist;
+            else
+            {
+                _salerRepository.Delete(isExist);
+                return isExist;
+            }
         }
 
         public List<Saler> GetAll()
@@ -65,18 +68,41 @@ namespace Business.Services
 
         public Saler Update(Saler saler, int id)
         {
-            Saler isExist = _salerRepository.GetOne(s => s.Id == id);
+            Saler isExist = _salerRepository.GetOne(b => b.Id == id);
             if (isExist == null)
             {
-                Notifications.Display(ConsoleColor.Red, ConsoleColor.DarkRed, "Error");
+                Notifications.Display(ConsoleColor.DarkRed, ConsoleColor.White, $" The {id} is not Exist in this List.\n Please Try Again! \n");
+                return null;
             }
-            isExist.Name = saler.Name;
-            isExist.SurName = saler.SurName;
+            else
+            {
+                string oldName = isExist.Name;
+                string oldSurname = isExist.SurName;
+                int oldAge = isExist.Age;
 
-            _salerRepository.Update(saler);
-            return saler;
+                string newName = saler.Name;
+                string newSurName = saler.SurName;
+                int newAge = saler.Age;
+
+                if (oldAge < newAge)
+                {
+                    Notifications.Display(ConsoleColor.DarkGreen, ConsoleColor.White, $" The {oldName} change to {newName}, {oldSurname} change to {newSurName} and Age Up {oldAge} to {newAge} \n");
+                }
+                else if (oldAge > newAge)
+                {
+                    Notifications.Display(ConsoleColor.DarkGreen, ConsoleColor.White, $" The {oldName} change to {newName}, {oldSurname} change to {newSurName} and Age Down {oldAge} to {newAge} \n");
+                }
+                else
+                {
+                    Notifications.Display(ConsoleColor.DarkGreen, ConsoleColor.White, $" The {oldName} change to {newName}, {oldSurname} change to {newSurName} and Age Doesn't Change! \n");
+                }
+                isExist.Name = saler.Name;
+                isExist.Age = saler.Age;
+                _salerRepository.Update(saler);
+                return isExist;
+            }
+
         }
-
         public Saler AddProduct(Product product, int id)
         {
             Saler isExist = _salerRepository.GetOne(s => s.Id == id);
