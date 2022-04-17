@@ -24,6 +24,7 @@ namespace Business.Services
         }
         public Product Create(Product product)
         {
+
             product.Id = ProdId;
             ProdId++;
             Count++;
@@ -41,12 +42,12 @@ namespace Business.Services
             return _productRepository.GetOne(p => p.Id == id);
         }
 
-        public Product Sale(int id)
+        public Product Delete(int id)
         {
             Product isExist = _productRepository.GetOne(p => p.Id == id);
             if (isExist == null)
             {
-                Notifications.Display(ConsoleColor.Red, ConsoleColor.DarkRed, "Error!! Mehsul yoxdu.");
+                Notifications.Display(ConsoleColor.Red, ConsoleColor.DarkRed, "Error!! Product is Not Exist! \n");
             }
             _productRepository.Delete(isExist);
             Count--;

@@ -10,6 +10,7 @@ namespace Business.Services
     public class BuyerService : IBuyer
     {
         public static int BuyerId { get; set; }
+        public static int Count { get; set; }
         private BuyerRepository _buyerRepository { get; set; }
         public BuyerRepository BuyerRepository
         {
@@ -25,18 +26,20 @@ namespace Business.Services
         {
             buyer.Id = BuyerId;
             BuyerId++;
+            Count++;
             _buyerRepository.Create(buyer);
             return buyer;
         }
 
         public Buyer Delete(int id)
         {
-            Buyer isExist = _buyerRepository.GetOne(p => p.Id == id);
+            Buyer isExist = _buyerRepository.GetOne(b => b.Id == id);
             if (isExist == null)
             {
-                Notifications.Display(ConsoleColor.Red, ConsoleColor.DarkRed, "Error!! Mehsul yoxdu.");
+                Notifications.Display(ConsoleColor.White, ConsoleColor.DarkRed, "Error!! Buyer is Not Exist!\n");
             }
             _buyerRepository.Delete(isExist);
+            Count--;
             return isExist;
         }
 
@@ -64,7 +67,6 @@ namespace Business.Services
             }
             isExist.Name = buyer.Name;
             isExist.SurName = buyer.SurName;
-
             _buyerRepository.Update(buyer);
             return buyer;
         }

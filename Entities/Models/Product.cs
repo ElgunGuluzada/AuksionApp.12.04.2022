@@ -19,9 +19,9 @@ namespace AuksionApp._12._04._2022
             set { _name = value; }
         }
 
-        private double _price;
+        private int _price;
 
-        public double Price
+        public int Price
         {
             get { return _price; }
             set { _price = value; }

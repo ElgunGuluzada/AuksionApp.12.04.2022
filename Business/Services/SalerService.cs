@@ -11,6 +11,8 @@ namespace Business.Services
     public class SalerService : ISaler
     {
         public static int SalerId { get; set; }
+        public static int Count { get; set; }
+
         private SalerRepository _salerRepository;
         public SalerRepository SalerRepository {
             get { return _salerRepository; }
@@ -23,6 +25,7 @@ namespace Business.Services
         {
             buyer.Id = SalerId;
             SalerId++;
+            Count++;
             _salerRepository.Create(buyer);
             return buyer;
         }
@@ -35,6 +38,7 @@ namespace Business.Services
                 Notifications.Display(ConsoleColor.Red, ConsoleColor.DarkRed, "Error!! Mehsul yoxdu.");
             }
             _salerRepository.Delete(isExist);
+            Count--;
             return isExist;
         }
 

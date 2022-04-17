@@ -11,6 +11,6 @@ namespace Business.Interface
         Product GetOne(int id);
         List<Product> GetAll();
         Product Update(Product product, int id);
-        Product Sale(int id);
+        Product Delete(int id);
     }
 }
