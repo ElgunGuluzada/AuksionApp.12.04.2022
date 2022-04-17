@@ -23,7 +23,7 @@ namespace AuksionApp._12._04._2022.Controllers
             };
             Console.Clear();
             _productService.Create(product);
-            Notifications.Display(ConsoleColor.Green, ConsoleColor.DarkGreen, $"{product.Name} created");
+            Notifications.Display(ConsoleColor.Green, ConsoleColor.DarkGreen, $"{product.Name} created\n");
         }
         public void UpdateProduct()
         {
