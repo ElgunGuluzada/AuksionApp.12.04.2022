@@ -53,6 +53,7 @@ namespace AuksionApp._12._04._2022.Controllers
                     SurName = newSurName,
                     Age = newAge
                 };
+
                 buyerService.Update(buyer, id);
             }
         }
@@ -74,7 +75,16 @@ namespace AuksionApp._12._04._2022.Controllers
 
         public void GetBuyer()
         {
-
+            if (DataContext.Buyers.Count <= 0)
+            {
+                Notifications.Display(ConsoleColor.White, ConsoleColor.DarkRed, " Buyer not available \n Please Try Again! \n");
+            }
+            else
+            {
+                Notifications.Display(ConsoleColor.White, ConsoleColor.DarkRed, " Please Enter ID for searching \n");
+                int id = TryMethods.TryParseMethod();
+                Notifications.Display(ConsoleColor.DarkBlue, ConsoleColor.White, $" {buyerService.GetOne(id)} \n");
+            }
         }
 
         public void GetAllBuyers()
@@ -86,7 +96,6 @@ namespace AuksionApp._12._04._2022.Controllers
                     $" Buyer Name: {byr.Name}\n" +
                     $" Buyer SurName: {byr.SurName} \n" +
                     $" Buyer Age: {byr.Age}\n");
-
             }
         }
 

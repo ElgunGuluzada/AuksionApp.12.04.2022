@@ -67,7 +67,16 @@ namespace AuksionApp._12._04._2022.Controllers
 
         public void GetProduct()
         {
-
+            if (DataContext.Products.Count <= 0)
+            {
+                Notifications.Display(ConsoleColor.White, ConsoleColor.DarkRed, " Product not available \n Please Try Again! \n");
+            }
+            else
+            {
+                Notifications.Display(ConsoleColor.White, ConsoleColor.DarkRed, " Please Enter ID for searching \n");
+                int id = TryMethods.TryParseMethod();
+                Notifications.Display(ConsoleColor.DarkBlue, ConsoleColor.White, $" {productService.GetOne(id)} \n");
+            }
         }
 
         public void GetAllProducts()

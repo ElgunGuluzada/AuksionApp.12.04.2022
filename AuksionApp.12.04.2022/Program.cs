@@ -11,7 +11,9 @@ namespace AuksionApp._12._04._2022
         static void Main(string[] args)
         {
 
-            Notifications.Display(ConsoleColor.Red, ConsoleColor.White, "\n      Welcome \n");
+            Notifications.Display(ConsoleColor.Red, ConsoleColor.White, "\n                                  " +
+                "     Welcome                                " +
+                "         \n");
             ProductController productController = new ProductController();
             BuyerController buyerController = new BuyerController();
             SalerController salerController = new SalerController();
@@ -22,46 +24,71 @@ namespace AuksionApp._12._04._2022
 
             Menu: Menu.ShowMenu();
                 int input = TryMethods.TryParseMethod();
-                if (input >= 0 && input <= 18)
+                if (input >= 0 && input <= 20)
                 {
                     switch (input)
-                    {
+                    {   
                         case (int)Menu.MenuBar.Quit:
+                            Console.Clear();
                             goto Quit;
                         case (int)Menu.MenuBar.CreateProduct:
+                            Console.Clear();
                             productController.CreateProduct();
                             break;
                         case (int)Menu.MenuBar.UpdateProduct:
+                            Console.Clear();
                             productController.UpdateProduct();
                             break;
                         case (int)Menu.MenuBar.DeleteProduct:
+                            Console.Clear();
                             productController.DeleteProduct();
                             break;
-                        case (int)Menu.MenuBar.GetAllProduct:
+                        case (int)Menu.MenuBar.GetProduct:
+                            Console.Clear();
+                            productController.GetProduct();
+                            break;
+                        case (int)Menu.MenuBar.GetAllProducts:
+                            Console.Clear();
                             productController.GetAllProducts();
                             break;
                         case (int)Menu.MenuBar.CreateBuyer:
+                            Console.Clear();
                             buyerController.CreateBuyer();
                             break;
                         case (int)Menu.MenuBar.UpdateBuyer:
+                            Console.Clear();
                             buyerController.UpdateBuyer();
                             break;
                         case (int)Menu.MenuBar.DeleteBuyer:
+                            Console.Clear();
                             buyerController.DeleteBuyer();
                             break;
-                        case (int)Menu.MenuBar.GetAllBuyer:
+                        case (int)Menu.MenuBar.GetBuyer:
+                            Console.Clear();
+                            buyerController.GetBuyer();
+                            break;
+                        case (int)Menu.MenuBar.GetAllBuyers:
+                            Console.Clear();
                             buyerController.GetAllBuyers();
                             break;
                         case (int)Menu.MenuBar.CreateSaler:
+                            Console.Clear();
                             salerController.CreateSaler();
                             break;
                         case (int)Menu.MenuBar.UpdateSaler:
+                            Console.Clear();
                             salerController.UpdateSaler();
                             break;
                         case (int)Menu.MenuBar.DeleteSaler:
+                            Console.Clear();
                             salerController.DeleteSaler();
                             break;
-                        case (int)Menu.MenuBar.GetAllSaler:
+                        case (int)Menu.MenuBar.GetSaler:
+                            Console.Clear();
+                            salerController.GetSaler();
+                            break;
+                        case (int)Menu.MenuBar.GetAllSalers:
+                            Console.Clear();
                             salerController.GetAllSalers();
                             break;
 

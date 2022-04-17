@@ -37,7 +37,13 @@ namespace Business.Services
 
         public Product GetOne(int id)
         {
-            return _productRepository.GetOne(p => p.Id == id);
+            Product isExist = _productRepository.GetOne(b => b.Id == id);
+            if (isExist == null)
+            {
+                Notifications.Display(ConsoleColor.Red, ConsoleColor.DarkRed, $"The {id} does not exist");
+                return null;
+            }
+            return isExist;
         }
 
         public Product Delete(int id)
@@ -88,7 +94,7 @@ namespace Business.Services
                 _productRepository.Update(product);
                 return isExist;
             }
-            
+
         }
     }
 }

@@ -62,8 +62,13 @@ namespace Business.Services
 
         public Saler GetOne(int id)
         {
-            return _salerRepository.GetOne(s => s.Id == id);
-
+            Saler isExist = _salerRepository.GetOne(b => b.Id == id);
+            if (isExist == null)
+            {
+                Notifications.Display(ConsoleColor.Red, ConsoleColor.DarkRed, $"The {id} does not exist");
+                return null;
+            }
+            return isExist;
         }
 
         public Saler Update(Saler saler, int id)

@@ -62,13 +62,13 @@ namespace AuksionApp._12._04._2022.Controllers
         {
             if (DataContext.Buyers.Count <= 0)
             {
-                Notifications.Display(ConsoleColor.White, ConsoleColor.DarkRed, " Product not available \n Please Try Again! \n");
+                Notifications.Display(ConsoleColor.White, ConsoleColor.DarkRed, " Saler not available \n Please Try Again! \n");
             }
             else
             {
-                Notifications.Display(ConsoleColor.DarkBlue, ConsoleColor.White, " All Products \n");
+                Notifications.Display(ConsoleColor.DarkBlue, ConsoleColor.White, " All Saler \n");
                 GetAllSalers();
-                Notifications.Display(ConsoleColor.Black, ConsoleColor.White, " Choose Product Id: ");
+                Notifications.Display(ConsoleColor.Black, ConsoleColor.White, " Choose Saler Id: ");
                 int id = TryMethods.TryParseMethod();
                 salerService.Delete(id);
             }
@@ -76,7 +76,16 @@ namespace AuksionApp._12._04._2022.Controllers
 
         public void GetSaler()
         {
-
+            if (DataContext.Salers.Count <= 0)
+            {
+                Notifications.Display(ConsoleColor.White, ConsoleColor.DarkRed, " Saler not available \n Please Try Again! \n");
+            }
+            else
+            {
+                Notifications.Display(ConsoleColor.White, ConsoleColor.DarkRed, " Please Enter ID for searching \n");
+                int id = TryMethods.TryParseMethod();
+                Notifications.Display(ConsoleColor.DarkBlue, ConsoleColor.White, $" {salerService.GetOne(id)} \n");
+            }
         }
 
         public void GetAllSalers()

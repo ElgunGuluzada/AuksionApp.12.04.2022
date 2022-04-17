@@ -58,7 +58,13 @@ namespace Business.Services
 
         public Buyer GetOne(int id)
         {
-            return _buyerRepository.GetOne(b => b.Id == id);
+            Buyer isExist = _buyerRepository.GetOne(b => b.Id == id);
+            if (isExist == null)
+            {
+                Notifications.Display(ConsoleColor.Red, ConsoleColor.DarkRed, $"The {id} does not exist");
+                return null;
+            }
+            return isExist;
         }
 
         public Buyer Update(Buyer buyer, int id)
