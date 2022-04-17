@@ -40,9 +40,10 @@ namespace Business.Services
             Product isExist = _productRepository.GetOne(b => b.Id == id);
             if (isExist == null)
             {
-                Notifications.Display(ConsoleColor.Red, ConsoleColor.DarkRed, $"The {id} does not exist");
+                Notifications.Display(ConsoleColor.White, ConsoleColor.DarkRed, $" The {id} does not exist\n");
                 return null;
             }
+            Notifications.Display(ConsoleColor.DarkBlue, ConsoleColor.White, $" This is {isExist.Name} \n");
             return isExist;
         }
 
@@ -96,5 +97,7 @@ namespace Business.Services
             }
 
         }
+
+
     }
 }

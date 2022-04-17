@@ -37,12 +37,7 @@ namespace AuksionApp._12._04._2022
             get { return _buyerPrice; }
             set { _buyerPrice = value; }
         }
+        public List<Product> Products;
       
-        List<Product> _products;
-        public List<Product> Products
-        {
-            get { return _products; }
-            set { _products = value; }
-        }
     }
 }

@@ -11,17 +11,13 @@ namespace AuksionApp._12._04._2022
         static void Main(string[] args)
         {
 
-            Notifications.Display(ConsoleColor.Red, ConsoleColor.White, "\n                                  " +
-                "     Welcome                                " +
-                "         \n");
+            Notifications.Display(ConsoleColor.Red, ConsoleColor.White, "\n                                                 Welcome                                                   \n");
             ProductController productController = new ProductController();
             BuyerController buyerController = new BuyerController();
             SalerController salerController = new SalerController();
-
             
             while (true)
             {
-
             Menu: Menu.ShowMenu();
                 int input = TryMethods.TryParseMethod();
                 if (input >= 0 && input <= 20)
@@ -29,10 +25,8 @@ namespace AuksionApp._12._04._2022
                     switch (input)
                     {   
                         case (int)Menu.MenuBar.Quit:
-                            Console.Clear();
                             goto Quit;
                         case (int)Menu.MenuBar.CreateProduct:
-                            Console.Clear();
                             productController.CreateProduct();
                             break;
                         case (int)Menu.MenuBar.UpdateProduct:
@@ -52,7 +46,6 @@ namespace AuksionApp._12._04._2022
                             productController.GetAllProducts();
                             break;
                         case (int)Menu.MenuBar.CreateBuyer:
-                            Console.Clear();
                             buyerController.CreateBuyer();
                             break;
                         case (int)Menu.MenuBar.UpdateBuyer:
@@ -71,8 +64,11 @@ namespace AuksionApp._12._04._2022
                             Console.Clear();
                             buyerController.GetAllBuyers();
                             break;
-                        case (int)Menu.MenuBar.CreateSaler:
+                        case (int)Menu.MenuBar.BuyProductForBuyer:
                             Console.Clear();
+                            buyerController.BuyProductForBuyer();
+                            break;
+                        case (int)Menu.MenuBar.CreateSaler:
                             salerController.CreateSaler();
                             break;
                         case (int)Menu.MenuBar.UpdateSaler:
@@ -91,7 +87,6 @@ namespace AuksionApp._12._04._2022
                             Console.Clear();
                             salerController.GetAllSalers();
                             break;
-
                         default:
                             goto Menu;
                     }

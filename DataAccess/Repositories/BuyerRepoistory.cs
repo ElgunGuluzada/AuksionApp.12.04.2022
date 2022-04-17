@@ -2,7 +2,6 @@
 using DataAccess.Interface;
 using System;
 using System.Collections.Generic;
-using Utilities;
 
 namespace DataAccess.Repositories
 {
@@ -27,7 +26,7 @@ namespace DataAccess.Repositories
             try
             {
                 DataContext.Buyers.Remove(entity);
-                    return true;
+                return true;
             }
             catch (Exception)
             {
@@ -88,20 +87,33 @@ namespace DataAccess.Repositories
         //    }
         //}
 
-        public Buyer AddProduct(Product product)
+        public bool BuyProduct(Product product)
         {
             try
             {
-              Buyer buyer = DataContext.Buyers.Find(b=>b.Id==product.Id);
-                buyer.Products = new List<Product>();
+                Buyer buyer = DataContext.Buyers.Find(b => b.Id == product.BuyerId);
                 buyer.Products.Add(product);
-                Notifications.Display(ConsoleColor.Green, ConsoleColor.DarkGreen, $"{product.Name} {buyer.Name} terefinden alindi..");
-                return buyer;
+                return true;
             }
             catch (Exception)
             {
                 throw;
             }
         }
+
+        //public bool BuyProduct(Product product)
+        //{
+        //    try
+        //    {
+        //        List<Buyer> isExist = DataContext.Buyers.FindAll(b=>b.Id==product.BuyerId);
+        //        Buyer buyer = DataContext.Buyers.Find(b => b.Id == product.BuyerId);
+        //        buyer.Products.Add(product);
+        //        return true;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
     }
 }

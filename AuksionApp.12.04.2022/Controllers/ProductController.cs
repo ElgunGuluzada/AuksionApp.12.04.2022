@@ -23,7 +23,7 @@ namespace AuksionApp._12._04._2022.Controllers
             };
             Console.Clear();
             productService.Create(product);
-            Notifications.Display(ConsoleColor.Green, ConsoleColor.DarkGreen, $" The {product.Name} went on sale for ${product.Price} on {DateTime.Now}\n");
+            Notifications.Display(ConsoleColor.White, ConsoleColor.DarkGreen, $" The {product.Name} went on sale for ${product.Price} on {DateTime.Now}\n");
         }
         public void UpdateProduct()
         {
@@ -65,23 +65,24 @@ namespace AuksionApp._12._04._2022.Controllers
             }
         }
 
-        public void GetProduct()
+        public Product GetProduct()
         {
             if (DataContext.Products.Count <= 0)
             {
                 Notifications.Display(ConsoleColor.White, ConsoleColor.DarkRed, " Product not available \n Please Try Again! \n");
+                return null;
             }
             else
             {
                 Notifications.Display(ConsoleColor.White, ConsoleColor.DarkRed, " Please Enter ID for searching \n");
                 int id = TryMethods.TryParseMethod();
-                Notifications.Display(ConsoleColor.DarkBlue, ConsoleColor.White, $" {productService.GetOne(id)} \n");
+                return productService.GetOne(id);
+
             }
         }
 
         public void GetAllProducts()
         {
-            Console.Clear();
             foreach (var item in productService.GetAll())
             {
                 Notifications.Display(ConsoleColor.DarkBlue, ConsoleColor.White, $" Product Id: {item.Id}\n" +

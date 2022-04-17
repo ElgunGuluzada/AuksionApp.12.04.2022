@@ -10,15 +10,15 @@ namespace Utilities
         /// </summary>
         public static void ShowMenu()
         {
-            Notifications.Display(ConsoleColor.Black, ConsoleColor.White,
-                $"   Products Menu                     Buyer Menu                          Saler Menu    \n"+
-                $" 1-Create Product                  8-Create Buyer                     15-Create Saler  \n" +
-                $" 2-Update Product                  9-Update Buyer                     16-Update Saler  \n" +
-                $" 3-Delete Product                  10-Delete Buyer                    17-Delete Saler  \n" +
-                $" 4-GetProductById                  11-GetBuyerById                    18-GetSalerById  \n" +
-                $" 5-GetAll Products                 12-GetAll Buyers                   19-GetAll Salers \n" +
-
-                $"\n                                        0-Quit                                         \n" 
+            Notifications.Display(ConsoleColor.DarkGreen, ConsoleColor.White,
+                $"\n             Products Menu                     Buyer Menu                          Saler Menu              \n"+
+                $"           1-Create Product                  8-Create Buyer                     15-Create Saler            \n" +
+                $"           2-Update Product                  9-Update Buyer                     16-Update Saler            \n" +
+                $"           3-Delete Product                  10-Delete Buyer                    17-Delete Saler            \n" +
+                $"           4-GetProductById                  11-GetBuyerById                    18-GetSalerById            \n" +
+                $"           5-GetAll Products                 12-GetAll Buyers                   19-GetAll Salers           \n" +
+                $"                                             13-BuyProductForBuyer                                         \n" +
+                $"\n                                             0-Quit                                                        \n" 
 
 
 
@@ -56,6 +56,7 @@ namespace Utilities
             DeleteBuyer = 10,
             GetBuyer = 11,
             GetAllBuyers = 12,
+            BuyProductForBuyer = 13,
             CreateSaler = 15,
             UpdateSaler = 16,
             DeleteSaler = 17,

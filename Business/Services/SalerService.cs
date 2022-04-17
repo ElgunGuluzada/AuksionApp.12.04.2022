@@ -68,6 +68,7 @@ namespace Business.Services
                 Notifications.Display(ConsoleColor.Red, ConsoleColor.DarkRed, $"The {id} does not exist");
                 return null;
             }
+            Notifications.Display(ConsoleColor.DarkBlue, ConsoleColor.White, $" This is {isExist.Name} \n");
             return isExist;
         }
 

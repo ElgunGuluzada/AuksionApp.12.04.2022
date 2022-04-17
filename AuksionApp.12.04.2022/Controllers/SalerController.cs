@@ -84,13 +84,12 @@ namespace AuksionApp._12._04._2022.Controllers
             {
                 Notifications.Display(ConsoleColor.White, ConsoleColor.DarkRed, " Please Enter ID for searching \n");
                 int id = TryMethods.TryParseMethod();
-                Notifications.Display(ConsoleColor.DarkBlue, ConsoleColor.White, $" {salerService.GetOne(id)} \n");
+                salerService.GetOne(id);
             }
         }
 
         public void GetAllSalers()
         {
-            Console.Clear();
             foreach (var slr in salerService.GetAll())
             {
                 Notifications.Display(ConsoleColor.DarkBlue, ConsoleColor.White, $" Saler Id: {slr.Id}\n" +
