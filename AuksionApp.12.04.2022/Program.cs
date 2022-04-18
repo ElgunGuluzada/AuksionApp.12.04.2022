@@ -20,7 +20,7 @@ namespace AuksionApp._12._04._2022
             {
             Menu: Menu.ShowMenu();
                 int input = TryMethods.TryParseMethod();
-                if (input >= 0 && input <= 20)
+                if (input >= 0 && input <= 22)
                 {
                     switch (input)
                     {   
@@ -90,6 +90,14 @@ namespace AuksionApp._12._04._2022
                         case (int)Menu.MenuBar.BuyProductForSaler:
                             Console.Clear();
                             salerController.BuyProductForSaler();
+                            break;
+                        case (int)Menu.MenuBar.SalerSaleProductForBuyer:
+                            Console.Clear();
+                            salerController.SaleProductForBuyer();
+                            break;
+                        case (int)Menu.MenuBar.SaleProduct:
+                            Console.Clear();
+                            salerController.SaleProduct();
                             break;
                         default:
                             goto Menu;

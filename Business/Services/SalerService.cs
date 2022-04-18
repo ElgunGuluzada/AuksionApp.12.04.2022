@@ -3,7 +3,6 @@ using Business.Interface;
 using DataAccess.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Utilities;
 
 namespace Business.Services
@@ -14,12 +13,14 @@ namespace Business.Services
         public static int Count { get; set; }
 
         private SalerRepository _salerRepository;
-        public SalerRepository SalerRepository {
+        public SalerRepository SalerRepository
+        {
             get { return _salerRepository; }
-            set { _salerRepository = value; } }
+            set { _salerRepository = value; }
+        }
         public SalerService()
         {
-            _salerRepository= new SalerRepository();
+            _salerRepository = new SalerRepository();
         }
         public Saler Create(Saler saler)
         {
@@ -45,9 +46,14 @@ namespace Business.Services
             }
         }
 
-        public List<Saler> GetAll()
+        public List<Saler> GetAll(string filter = null)
         {
-            return _salerRepository.GetAll();
+            List<Saler> isExist = filter == null ? _salerRepository.GetAll() : _salerRepository.GetAll(b => b.Name == filter);
+            if (isExist == null)
+            {
+                Notifications.Display(ConsoleColor.Red, ConsoleColor.White, $" Nothing Found!");
+            }
+            return isExist;
         }
 
         public List<Buyer> GetAllBuyers()
@@ -138,7 +144,7 @@ namespace Business.Services
 
         public Product BuyProductForSaler(Product product)
         {
-            Saler sylrFind = _salerRepository.GetOne(b => b.Id == product.SalerId);
+            Saler sylrFind = _salerRepository.GetOne(s => s.Id == product.SalerId);
 
             if (sylrFind == null)
             {
@@ -148,12 +154,60 @@ namespace Business.Services
             else
             {
                 product.Id = sylrFind.Products.Count;
-                _salerRepository.BuyProductForSaler(product, product.BuyerId);
-                //DataContext.Products.Remove(product);
+                _salerRepository.BuyProductForSaler(product, product.SalerId);
                 Notifications.Display(ConsoleColor.White, ConsoleColor.DarkGreen, $" The {product.Name} Purchased By {sylrFind.Name} ");
                 return product;
             }
+        }
+        public Product SaleProduct(Product product)
+        {
+            Saler sylrFind = _salerRepository.GetOne(s => s.Id == product.SalerId);
+            Product product1 = sylrFind.Products.Find(p => p.Id == product.SalerId);
 
+            if (product1.Id==product.Id)
+            {
+
+            }
+
+            if (sylrFind == null)
+            {
+                Notifications.Display(ConsoleColor.White, ConsoleColor.DarkRed, " Id does not exist. \n Please Try Again!\n");
+                return null;
+            }
+            else
+            {
+                product.Id = sylrFind.Products.Count;
+                _salerRepository.SaleProduct(product, product.SalerId);
+                Notifications.Display(ConsoleColor.White, ConsoleColor.DarkRed, $" The {product.Name} Saled!");
+                return product;
+            }
+        }
+        public Buyer SaleProductForBuyer(int prdctId, int sylrId, int byrId)
+        {
+            BuyerRepository buyerRepository = new BuyerRepository();
+            Saler saler = _salerRepository.GetOne(s => s.Id == sylrId);
+            Buyer buyer = buyerRepository.GetOne(b => b.Id == byrId);
+            if (byrId < 0 || sylrId < 0)
+            {
+                Notifications.Display(ConsoleColor.Red, ConsoleColor.White, "This Saled is Failed.");
+                return null;
+            }
+
+            else if (saler == null || buyer == null)
+            {
+                Notifications.Display(ConsoleColor.Red, ConsoleColor.White, "ErroR");
+                return null;
+            }
+
+            else
+            {
+                _salerRepository.SaleProductForBuyer(prdctId, sylrId, byrId);
+                for (int i = 0; i < saler.Products.Count; i++)
+                {
+                    saler.Products[i].Id = i + 1;
+                }
+                return buyer;
+            }
         }
     }
 }

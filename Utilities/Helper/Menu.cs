@@ -11,14 +11,15 @@ namespace Utilities
         public static void ShowMenu()
         {
             Notifications.Display(ConsoleColor.DarkGreen, ConsoleColor.White,
-                $"\n                    Products Menu                     Buyer Menu                          Saler Menu                    \n"+
+                $"\n                    Products Menu                     Buyer Menu                          Saler Menu                    \n" +
                 $"                  1-Create Product                  8-Create Buyer                     15-Create Saler                  \n" +
                 $"                  2-Update Product                  9-Update Buyer                     16-Update Saler                  \n" +
                 $"                  3-Delete Product                  10-Delete Buyer                    17-Delete Saler                  \n" +
                 $"                  4-GetProductById                  11-GetBuyerById                    18-GetSalerById                  \n" +
                 $"                  5-GetAll Products                 12-GetAll Buyers                   19-GetAll Salers                 \n" +
                 $"                                                    13-BuyProductForBuyer              20-BuyProductForSaler            \n" +
-                $"                                                                                                                                                                            0-Quit                                                              \n" 
+                $"                                                    21-SalerSaleProductForBuyer        22-SaleProduct                   \n " +
+                $"                                                                                                                                                                            0-Quit                                                             \n"
 
 
 
@@ -64,6 +65,8 @@ namespace Utilities
             GetSaler = 18,
             GetAllSalers = 19,
             BuyProductForSaler = 20,
+            SalerSaleProductForBuyer = 21,
+            SaleProduct = 22
         }
     }
 }

@@ -100,16 +100,49 @@ namespace DataAccess.Repositories
         //    }
         //}
 
-        public bool BuyProductForSaler(Product product, int byrId)
+        public bool BuyProductForSaler(Product product, int sylrId)
         {
             try
             {
-                Buyer buyer = DataContext.Buyers.Find(b => b.Id == byrId);
-                buyer.Products.Add(product);
+                Saler saler = DataContext.Salers.Find(s => s.Id == sylrId);
+                saler.Products.Add(product);
                 return true;
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+        public bool SaleProduct(Product product, int sylrId)
+        {
+            try
+            {
+                Saler saler = DataContext.Salers.Find(s => s.Id == sylrId);
+                saler.Products.Remove(product);
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public bool SaleProductForBuyer(int prdctId,int sylrId,int byrId)
+        {
+            try
+            {
+
+                Saler saler = DataContext.Salers.Find(s => s.Id == sylrId);
+                Buyer newBuyer = DataContext.Buyers.Find(s => s.Id == byrId);
+
+                Product product = newBuyer.Products[prdctId];
+                product.Id = newBuyer.Products.Count;
+                saler.Products.Remove(product);
+                newBuyer.Products.Add(product);
+                return true;
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }

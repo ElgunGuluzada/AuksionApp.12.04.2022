@@ -9,7 +9,7 @@ namespace Business.Interface
     {
         Saler Create(Saler saler);
         Saler GetOne(int id);
-        List<Saler> GetAll();
+        List<Saler> GetAll(string filter = null);
         Saler Update(Saler saler, int id);
         Saler Delete(int id);
         List<Buyer> GetAllBuyers();

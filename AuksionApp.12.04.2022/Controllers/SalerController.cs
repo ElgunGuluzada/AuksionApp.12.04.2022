@@ -130,5 +130,56 @@ namespace AuksionApp._12._04._2022.Controllers
                 salerService.BuyProductForSaler(product);
             }
         }
+        public void SaleProduct()
+        {
+            if (DataContext.Salers.Count <= 0)
+            {
+                Notifications.Display(ConsoleColor.White, ConsoleColor.DarkRed, " Saler not available \n Please Write 15! \n");
+            }
+            else
+            {
+                GetAllSalers();
+
+                Notifications.Display(ConsoleColor.DarkGreen, ConsoleColor.White, $" Entry Product Name for Add to Saler \n");
+                string prdctName = TryMethods.TryNullOrEmptyMethod();
+                Notifications.Display(ConsoleColor.DarkGreen, ConsoleColor.White, $" Entry Product Price  \n");
+                int prdctPrice = TryMethods.TryParseMethod();
+                Notifications.Display(ConsoleColor.DarkGreen, ConsoleColor.White, $" Entry Id Saler for Add \n");
+                int sylrId = TryMethods.TryParseMethod();
+
+                Product product = new Product()
+                {
+                    Name = prdctName,
+                    Price = prdctPrice,
+                    BuyerId = sylrId
+                };
+                salerService.SaleProduct(product);
+            }
+        }
+
+
+        public void SaleProductForBuyer()
+        {
+            BuyerController buyerController = new BuyerController();
+            GetAllSalers();
+            buyerController.GetAllBuyers();
+            if (DataContext.Salers.Count <= 0)
+            {
+                Notifications.Display(ConsoleColor.DarkRed,ConsoleColor.White, " First Create Saler\n Please Try Again \n Write 15! \n");
+            }
+            else
+            {
+
+            Notifications.Display(ConsoleColor.Yellow, ConsoleColor.Black, $" Entry Product Id for Add to Buyer \n");
+            int prdctId = TryMethods.TryParseMethod();
+            Notifications.Display(ConsoleColor.Yellow, ConsoleColor.Black, $" Entry Saler Id \n");
+            int sylrId = TryMethods.TryParseMethod();
+            Notifications.Display(ConsoleColor.Yellow, ConsoleColor.Black, $" Entry Id Buyer for Add \n");
+            int byrId = TryMethods.TryParseMethod();
+
+           
+            salerService.SaleProductForBuyer(prdctId,sylrId,byrId);
+            }
+        }
     }
 }
