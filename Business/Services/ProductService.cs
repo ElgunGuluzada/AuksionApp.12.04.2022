@@ -29,11 +29,21 @@ namespace Business.Services
             _productRepository.Create(product);
             return product;
         }
-
+         /// <summary>
+        /// Bu Method ise dusduyunde butun productlari tapir ve ekrana cap edir.
+        /// </summary>
+        /// <returns></returns>
         public List<Product> GetAll()
         {
             return _productRepository.GetAll();
         }
+
+        /// <summary>
+        /// Bu Method ise dusduyunde qeyd edilen id -e gore hemin mehsulu tapir ve ekrana cap edir.
+        /// Eger hemin id-e mexsus mehsul tapmirsa mehsulun olmadigina dair mesaj gisterir
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
 
         public Product GetOne(int id)
         {
@@ -46,6 +56,12 @@ namespace Business.Services
             Notifications.Display(ConsoleColor.DarkBlue, ConsoleColor.White, $" This is {isExist.Name} \n");
             return isExist;
         }
+          /// <summary>
+        /// Bu Method ise dusduyunde qeyd edilen id -e gore hemin mehsulu tapir ve onu silir.
+        /// Eger hemin id-e mexsus mehsul tapmirsa mehsulun olmadigina dair mesaj gisterir
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
 
         public Product Delete(int id)
         {
@@ -61,7 +77,13 @@ namespace Business.Services
                 return isExist;
             }
         }
-
+         /// <summary>
+        /// Bu Method ise dusduyunde qeyd edilen id -e gore hemin mehsulu tapir ve onun sizden istenilen deyisikliye uygun olaraq deyisir
+        /// Deyisikliklerin nece oldugunu nezere alaraq ona uygun mesaj gosterir
+        /// Eger hemin id-e mexsus mehsul tapmirsa mehsulun olmadigina dair mesaj gisterir
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Product Update(Product product, int id)
         {
             Product isExist = _productRepository.GetOne(p => p.Id == id);

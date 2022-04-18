@@ -90,14 +90,45 @@ namespace AuksionApp._12._04._2022.Controllers
 
         public void GetAllSalers()
         {
-            foreach (var slr in salerService.GetAll())
+            foreach (var sylr in salerService.GetAll())
             {
-                Notifications.Display(ConsoleColor.DarkBlue, ConsoleColor.White, $" Saler Id: {slr.Id}\n" +
-                    $" Saler Name: {slr.Name}\n" +
-                    $" Saler SurName: {slr.SurName}\n" +
-                    $" Saler Age: {slr.Age}\n");
+                Notifications.Display(ConsoleColor.DarkBlue, ConsoleColor.White, $"          Saler Id: {sylr.Id}\n" +
+                    $"          Saler Name: {sylr.Name}\n" +
+                    $"          Saler SurName: {sylr.SurName}\n" +
+                    $"          Saler Age: {sylr.Age}\n");
+                foreach (var prdct in sylr.Products)
+                {
+                    Notifications.Display(ConsoleColor.DarkBlue, ConsoleColor.White, $"           Product Id: {prdct.Id}\n" +
+                  $"           Product Name: {prdct.Name}\n" +
+                  $"           Product Price: {prdct.Price}\n\n");
+                }
+            }
+        }
+        public void BuyProductForSaler()
+        {
+            if (DataContext.Salers.Count <= 0)
+            {
+                Notifications.Display(ConsoleColor.White, ConsoleColor.DarkRed, " Saler not available \n Please Write 15! \n");
+            }
+            else
+            {
+                GetAllSalers();
+
+                Notifications.Display(ConsoleColor.DarkGreen, ConsoleColor.White, $" Entry Product Name for Add to Saler \n");
+                string prdctName = TryMethods.TryNullOrEmptyMethod();
+                Notifications.Display(ConsoleColor.DarkGreen, ConsoleColor.White, $" Entry Product Price \n");
+                int prdctPrice = TryMethods.TryParseMethod();
+                Notifications.Display(ConsoleColor.DarkGreen, ConsoleColor.White, $" Entry Id Saler for Add \n");
+                int sylrId = TryMethods.TryParseMethod();
+
+                Product product = new Product()
+                {
+                    Name = prdctName,
+                    Price = prdctPrice,
+                    BuyerId = sylrId
+                };
+                salerService.BuyProductForSaler(product);
             }
         }
     }
-
 }

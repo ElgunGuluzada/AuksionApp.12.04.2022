@@ -58,7 +58,6 @@ namespace DataAccess.Repositories
                 throw;
             }
         }
-
         public bool Update(Saler entity)
         {
             try
@@ -85,21 +84,36 @@ namespace DataAccess.Repositories
         //    }
         //}
 
-        public Saler AddProduct(Product product)
+        //public Saler AddProduct(Product product)
+        //{
+        //    try
+        //    {
+        //        Saler saler = DataContext.Salers.Find(s => s.Id == product.Id);
+        //        saler.Products = new List<Product>();
+        //        saler.Products.Add(product);
+        //        Notifications.Display(ConsoleColor.Green, ConsoleColor.DarkGreen, $"{product.Name} {saler.Name} terefinden elde edildi..");
+        //        return saler;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
+
+        public bool BuyProductForSaler(Product product, int byrId)
         {
             try
             {
-                Saler saler = DataContext.Salers.Find(s => s.Id == product.Id);
-                saler.Products = new List<Product>();
-                saler.Products.Add(product);
-                Notifications.Display(ConsoleColor.Green, ConsoleColor.DarkGreen, $"{product.Name} {saler.Name} terefinden elde edildi..");
-                return saler;
+                Buyer buyer = DataContext.Buyers.Find(b => b.Id == byrId);
+                buyer.Products.Add(product);
+                return true;
             }
             catch (Exception)
             {
                 throw;
             }
         }
+
         public Saler SaleProduct(Product product)
         {
             try

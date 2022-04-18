@@ -47,9 +47,14 @@ namespace Business.Services
             }
         }
 
-        public List<Buyer> GetAll()
+        public List<Buyer> GetAll(string filter=null)
         {
-            return _buyerRepository.GetAll();
+            List<Buyer> isExist = filter == null ? _buyerRepository.GetAll() : _buyerRepository.GetAll(b => b.Name == filter);
+            if (isExist==null)
+            {
+                Notifications.Display(ConsoleColor.Red, ConsoleColor.White, $" Nothing Found!");
+            }
+            return isExist;
         }
 
         public List<Product> GetAllProducts(string name)
@@ -62,7 +67,7 @@ namespace Business.Services
             Buyer isExist = _buyerRepository.GetOne(b => b.Id == id);
             if (isExist == null)
             {
-                Notifications.Display(ConsoleColor.Red, ConsoleColor.DarkRed, $"The {id} does not exist");
+                Notifications.Display(ConsoleColor.Red, ConsoleColor.White, $"The {id} does not exist");
                 return null;
             }
             Notifications.Display(ConsoleColor.DarkBlue, ConsoleColor.White, $" This is {isExist.Name} \n");
@@ -106,9 +111,9 @@ namespace Business.Services
             }
 
         }
-        public Buyer BuyProduct(Product product,int id)
+        public Product BuyProductForBuyer(Product product)
         {
-            Buyer byrFind = _buyerRepository.GetOne(b => b.Id == id);
+            Buyer byrFind = _buyerRepository.GetOne(b => b.Id == product.BuyerId);
            
             if (byrFind == null)
             {
@@ -117,30 +122,13 @@ namespace Business.Services
             }
             else
             {
-                product.BuyerId = id;
-                _buyerRepository.BuyProduct(product);
+                product.Id = byrFind.Products.Count;
+                _buyerRepository.BuyProductForBuyer(product,product.BuyerId);
                 //DataContext.Products.Remove(product);
-                //Notifications.Display(ConsoleColor.White, ConsoleColor.DarkGreen, $" The {product.Name} Purchased By {byrFind.Name} ");
-                return byrFind;
+                Notifications.Display(ConsoleColor.White, ConsoleColor.DarkGreen, $" The {product.Name} Purchased By {byrFind.Name} ");
+                return product;
             }
 
         }
-
-        //public Buyer BuyProduct(Product product, int id)
-        //{
-        //    Buyer buyer = _buyerRepository.GetOne(b => b.Id == id);
-
-        //    if (buyer==null)
-        //    {
-        //        Notifications.Display(ConsoleColor.White, ConsoleColor.DarkRed, " Id does not exist. \n Please Try Again!\n");
-        //        return null;
-        //    }
-        //    else
-        //    {
-        //        product.BuyerId = buyer.Id;
-        //        _buyerRepository.BuyProduct(product);
-        //        return buyer;
-        //    }
-        //}
     }
 }

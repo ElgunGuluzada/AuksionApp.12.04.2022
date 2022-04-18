@@ -87,11 +87,11 @@ namespace DataAccess.Repositories
         //    }
         //}
 
-        public bool BuyProduct(Product product)
+        public bool BuyProductForBuyer(Product product, int byrId)
         {
             try
             {
-                Buyer buyer = DataContext.Buyers.Find(b => b.Id == product.BuyerId);
+                Buyer buyer = DataContext.Buyers.Find(b => b.Id == byrId);
                 buyer.Products.Add(product);
                 return true;
             }
@@ -100,20 +100,5 @@ namespace DataAccess.Repositories
                 throw;
             }
         }
-
-        //public bool BuyProduct(Product product)
-        //{
-        //    try
-        //    {
-        //        List<Buyer> isExist = DataContext.Buyers.FindAll(b=>b.Id==product.BuyerId);
-        //        Buyer buyer = DataContext.Buyers.Find(b => b.Id == product.BuyerId);
-        //        buyer.Products.Add(product);
-        //        return true;
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
     }
 }

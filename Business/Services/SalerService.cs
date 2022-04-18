@@ -109,30 +109,51 @@ namespace Business.Services
             }
 
         }
-        public Saler AddProduct(Product product, int id)
-        {
-            Saler isExist = _salerRepository.GetOne(s => s.Id == id);
-            if (isExist == null)
-            {
-                Notifications.Display(ConsoleColor.Red, ConsoleColor.DarkRed, "Id does not exist");
-                return null;
-            }
-            product.SalerId = id;
-            _salerRepository.AddProduct(product);
-            return isExist;
-        }
 
-        public Saler AddBuyer(Buyer buyer, int id)
+        //public Saler AddProduct(Product product, int id)
+        //{
+        //    Saler isExist = _salerRepository.GetOne(s => s.Id == id);
+        //    if (isExist == null)
+        //    {
+        //        Notifications.Display(ConsoleColor.Red, ConsoleColor.DarkRed, "Id does not exist");
+        //        return null;
+        //    }
+        //    product.SalerId = id;
+        //    _salerRepository.AddProduct(product);
+        //    return isExist;
+        //}
+
+        //public Saler AddBuyer(Buyer buyer, int id)
+        //{
+        //    Saler isExist = _salerRepository.GetOne(s => s.Id == id);
+        //    if (isExist == null)
+        //    {
+        //        Notifications.Display(ConsoleColor.Red, ConsoleColor.DarkRed, "Id does not exist");
+        //        return null;
+        //    }
+        //    buyer.SalerId = id;
+        //    _salerRepository.AddBuyer(buyer);
+        //    return isExist;
+        //}
+
+        public Product BuyProductForSaler(Product product)
         {
-            Saler isExist = _salerRepository.GetOne(s => s.Id == id);
-            if (isExist == null)
+            Saler sylrFind = _salerRepository.GetOne(b => b.Id == product.SalerId);
+
+            if (sylrFind == null)
             {
-                Notifications.Display(ConsoleColor.Red, ConsoleColor.DarkRed, "Id does not exist");
+                Notifications.Display(ConsoleColor.White, ConsoleColor.DarkRed, " Id does not exist. \n Please Try Again!\n");
                 return null;
             }
-            buyer.SalerId = id;
-            _salerRepository.AddBuyer(buyer);
-            return isExist;
+            else
+            {
+                product.Id = sylrFind.Products.Count;
+                _salerRepository.BuyProductForSaler(product, product.BuyerId);
+                //DataContext.Products.Remove(product);
+                Notifications.Display(ConsoleColor.White, ConsoleColor.DarkGreen, $" The {product.Name} Purchased By {sylrFind.Name} ");
+                return product;
+            }
+
         }
     }
 }

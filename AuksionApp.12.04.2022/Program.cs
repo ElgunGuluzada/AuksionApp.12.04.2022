@@ -11,7 +11,7 @@ namespace AuksionApp._12._04._2022
         static void Main(string[] args)
         {
 
-            Notifications.Display(ConsoleColor.Red, ConsoleColor.White, "\n                                                 Welcome                                                   \n");
+            Notifications.Display(ConsoleColor.Red, ConsoleColor.White, "\n                                                       Welcome                                                                                                                                                                                  ");
             ProductController productController = new ProductController();
             BuyerController buyerController = new BuyerController();
             SalerController salerController = new SalerController();
@@ -86,6 +86,10 @@ namespace AuksionApp._12._04._2022
                         case (int)Menu.MenuBar.GetAllSalers:
                             Console.Clear();
                             salerController.GetAllSalers();
+                            break;
+                        case (int)Menu.MenuBar.BuyProductForSaler:
+                            Console.Clear();
+                            salerController.BuyProductForSaler();
                             break;
                         default:
                             goto Menu;

@@ -6,19 +6,19 @@ namespace Utilities
     public class Menu
     {
         /// <summary>
-        /// Menu
+        /// Verilen Modellere uygun olaraq menyulari size gosterir. Modellerin bir birinden ayri qalmasi ucun bu usuldan istifade etmisem.
         /// </summary>
         public static void ShowMenu()
         {
             Notifications.Display(ConsoleColor.DarkGreen, ConsoleColor.White,
-                $"\n             Products Menu                     Buyer Menu                          Saler Menu              \n"+
-                $"           1-Create Product                  8-Create Buyer                     15-Create Saler            \n" +
-                $"           2-Update Product                  9-Update Buyer                     16-Update Saler            \n" +
-                $"           3-Delete Product                  10-Delete Buyer                    17-Delete Saler            \n" +
-                $"           4-GetProductById                  11-GetBuyerById                    18-GetSalerById            \n" +
-                $"           5-GetAll Products                 12-GetAll Buyers                   19-GetAll Salers           \n" +
-                $"                                             13-BuyProductForBuyer                                         \n" +
-                $"\n                                             0-Quit                                                        \n" 
+                $"\n                    Products Menu                     Buyer Menu                          Saler Menu                    \n"+
+                $"                  1-Create Product                  8-Create Buyer                     15-Create Saler                  \n" +
+                $"                  2-Update Product                  9-Update Buyer                     16-Update Saler                  \n" +
+                $"                  3-Delete Product                  10-Delete Buyer                    17-Delete Saler                  \n" +
+                $"                  4-GetProductById                  11-GetBuyerById                    18-GetSalerById                  \n" +
+                $"                  5-GetAll Products                 12-GetAll Buyers                   19-GetAll Salers                 \n" +
+                $"                                                    13-BuyProductForBuyer              20-BuyProductForSaler            \n" +
+                $"                                                                                                                                                                            0-Quit                                                              \n" 
 
 
 
@@ -42,6 +42,7 @@ namespace Utilities
         }
         /// <summary>
         /// Reqemleri Secerek Qeyd Edilen Menulari Istifade Ede Bilersiniz.
+        /// Bezi reqemlerin atlamasinin sebebi ise gelecekde menyuya elave punktlarin daxil oldugu zaman bos yerin olmasi ucundur.
         /// </summary>
         public enum MenuBar
         {
@@ -62,6 +63,7 @@ namespace Utilities
             DeleteSaler = 17,
             GetSaler = 18,
             GetAllSalers = 19,
+            BuyProductForSaler = 20,
         }
     }
 }

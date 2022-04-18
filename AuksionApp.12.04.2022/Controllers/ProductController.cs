@@ -77,7 +77,6 @@ namespace AuksionApp._12._04._2022.Controllers
                 Notifications.Display(ConsoleColor.White, ConsoleColor.DarkRed, " Please Enter ID for searching \n");
                 int id = TryMethods.TryParseMethod();
                 return productService.GetOne(id);
-
             }
         }
 

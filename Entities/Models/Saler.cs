@@ -35,11 +35,11 @@ namespace AuksionApp._12._04._2022
             set { _buyers = value; } 
         }
 
-        List<Product> _products;
-        public List<Product> Products
+        public List<Product> Products;
+        public Saler()
         {
-            get { return _products; }
-            set { _products = value; }
+            Products = new List<Product>();
         }
+       
     }
 }
