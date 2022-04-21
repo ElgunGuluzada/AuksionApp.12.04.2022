@@ -10,6 +10,6 @@ namespace Business.Interface
         List<Buyer> GetAll(string filter=null);
         Buyer Update(Buyer buyer, int id);
         Buyer Delete(int id);
-        //List<Product> GetAllProducts(string name);
+       
     }
 }

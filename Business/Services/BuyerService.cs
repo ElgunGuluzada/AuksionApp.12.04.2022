@@ -124,7 +124,6 @@ namespace Business.Services
             {
                 product.Id = byrFind.Products.Count;
                 _buyerRepository.BuyProductForBuyer(product,product.BuyerId);
-                //DataContext.Products.Remove(product);
                 Notifications.Display(ConsoleColor.White, ConsoleColor.DarkGreen, $" The {product.Name} Purchased By {byrFind.Name} ");
                 return product;
             }

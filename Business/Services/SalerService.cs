@@ -1,5 +1,6 @@
 ﻿using AuksionApp._12._04._2022;
 using Business.Interface;
+using DataAccess;
 using DataAccess.Repositories;
 using System;
 using System.Collections.Generic;
@@ -116,32 +117,6 @@ namespace Business.Services
 
         }
 
-        //public Saler AddProduct(Product product, int id)
-        //{
-        //    Saler isExist = _salerRepository.GetOne(s => s.Id == id);
-        //    if (isExist == null)
-        //    {
-        //        Notifications.Display(ConsoleColor.Red, ConsoleColor.DarkRed, "Id does not exist");
-        //        return null;
-        //    }
-        //    product.SalerId = id;
-        //    _salerRepository.AddProduct(product);
-        //    return isExist;
-        //}
-
-        //public Saler AddBuyer(Buyer buyer, int id)
-        //{
-        //    Saler isExist = _salerRepository.GetOne(s => s.Id == id);
-        //    if (isExist == null)
-        //    {
-        //        Notifications.Display(ConsoleColor.Red, ConsoleColor.DarkRed, "Id does not exist");
-        //        return null;
-        //    }
-        //    buyer.SalerId = id;
-        //    _salerRepository.AddBuyer(buyer);
-        //    return isExist;
-        //}
-
         public Product BuyProductForSaler(Product product)
         {
             Saler sylrFind = _salerRepository.GetOne(s => s.Id == product.SalerId);
@@ -159,54 +134,31 @@ namespace Business.Services
                 return product;
             }
         }
-        public Product SaleProduct(Product product)
+       
+        public void SaleProductForBuyer(int prdctId, int sylrId, int byrId)
         {
-            Saler sylrFind = _salerRepository.GetOne(s => s.Id == product.SalerId);
-            Product product1 = sylrFind.Products.Find(p => p.Id == product.SalerId);
-
-            if (product1.Id==product.Id)
-            {
-
-            }
-
-            if (sylrFind == null)
-            {
-                Notifications.Display(ConsoleColor.White, ConsoleColor.DarkRed, " Id does not exist. \n Please Try Again!\n");
-                return null;
-            }
-            else
-            {
-                product.Id = sylrFind.Products.Count;
-                _salerRepository.SaleProduct(product, product.SalerId);
-                Notifications.Display(ConsoleColor.White, ConsoleColor.DarkRed, $" The {product.Name} Saled!");
-                return product;
-            }
-        }
-        public Buyer SaleProductForBuyer(int prdctId, int sylrId, int byrId)
-        {
-            BuyerRepository buyerRepository = new BuyerRepository();
-            Saler saler = _salerRepository.GetOne(s => s.Id == sylrId);
-            Buyer buyer = buyerRepository.GetOne(b => b.Id == byrId);
             if (byrId < 0 || sylrId < 0)
             {
                 Notifications.Display(ConsoleColor.Red, ConsoleColor.White, "This Saled is Failed.");
-                return null;
             }
+            //uyerRepository buyerRepository = new BuyerRepository();
+            Saler saler = _salerRepository.GetOne(s => s.Id == sylrId);
+            Buyer buyer =DataContext.Buyers.Find(b => b.Id ==byrId);
+           
 
-            else if (saler == null || buyer == null)
+            if (saler == null || buyer == null)
             {
-                Notifications.Display(ConsoleColor.Red, ConsoleColor.White, "ErroR");
-                return null;
+                Notifications.Display(ConsoleColor.Red, ConsoleColor.White, "ErroR");           
             }
 
             else
             {
                 _salerRepository.SaleProductForBuyer(prdctId, sylrId, byrId);
+
                 for (int i = 0; i < saler.Products.Count; i++)
                 {
-                    saler.Products[i].Id = i + 1;
+                    saler.Products[i].Id = i;
                 }
-                return buyer;
             }
         }
     }

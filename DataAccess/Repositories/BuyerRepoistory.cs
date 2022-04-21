@@ -35,7 +35,10 @@ namespace DataAccess.Repositories
             }
         }
 
-
+        /// <summary>
+        /// Bu Method ise dusduyunde butun alicilari tapir ve ekrana cap edir.
+        /// </summary>
+        /// <returns></returns>
         public List<Buyer> GetAll(Predicate<Buyer> filter = null)
         {
             try
@@ -74,18 +77,6 @@ namespace DataAccess.Repositories
                 throw;
             }
         }
-
-        //public List<Product> GetAllProducts(Predicate<Product> filter = null)
-        //{
-        //    try
-        //    {
-        //        return filter == null ? DataContext.Products : DataContext.Products.FindAll(filter);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
 
         public bool BuyProductForBuyer(Product product, int byrId)
         {

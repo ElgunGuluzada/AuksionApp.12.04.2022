@@ -95,10 +95,6 @@ namespace AuksionApp._12._04._2022
                             Console.Clear();
                             salerController.SaleProductForBuyer();
                             break;
-                        case (int)Menu.MenuBar.SaleProduct:
-                            Console.Clear();
-                            salerController.SaleProduct();
-                            break;
                         default:
                             goto Menu;
                     }

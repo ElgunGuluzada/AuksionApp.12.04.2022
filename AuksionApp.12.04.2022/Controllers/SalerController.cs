@@ -11,7 +11,6 @@ namespace AuksionApp._12._04._2022.Controllers
     internal class SalerController
     {
         SalerService salerService = new SalerService();
-     
         public void CreateSaler()
         {
             Notifications.Display(ConsoleColor.Cyan, ConsoleColor.DarkCyan, "Enter to Saler Name: ");
@@ -71,6 +70,7 @@ namespace AuksionApp._12._04._2022.Controllers
                 Notifications.Display(ConsoleColor.Black, ConsoleColor.White, " Choose Saler Id: ");
                 int id = TryMethods.TryParseMethod();
                 salerService.Delete(id);
+                
             }
         }
 
@@ -129,34 +129,7 @@ namespace AuksionApp._12._04._2022.Controllers
                 };
                 salerService.BuyProductForSaler(product);
             }
-        }
-        public void SaleProduct()
-        {
-            if (DataContext.Salers.Count <= 0)
-            {
-                Notifications.Display(ConsoleColor.White, ConsoleColor.DarkRed, " Saler not available \n Please Write 15! \n");
-            }
-            else
-            {
-                GetAllSalers();
-
-                Notifications.Display(ConsoleColor.DarkGreen, ConsoleColor.White, $" Entry Product Name for Add to Saler \n");
-                string prdctName = TryMethods.TryNullOrEmptyMethod();
-                Notifications.Display(ConsoleColor.DarkGreen, ConsoleColor.White, $" Entry Product Price  \n");
-                int prdctPrice = TryMethods.TryParseMethod();
-                Notifications.Display(ConsoleColor.DarkGreen, ConsoleColor.White, $" Entry Id Saler for Add \n");
-                int sylrId = TryMethods.TryParseMethod();
-
-                Product product = new Product()
-                {
-                    Name = prdctName,
-                    Price = prdctPrice,
-                    BuyerId = sylrId
-                };
-                salerService.SaleProduct(product);
-            }
-        }
-
+        } 
 
         public void SaleProductForBuyer()
         {

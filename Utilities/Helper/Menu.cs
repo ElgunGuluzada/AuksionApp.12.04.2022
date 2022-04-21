@@ -18,7 +18,7 @@ namespace Utilities
                 $"                  4-GetProductById                  11-GetBuyerById                    18-GetSalerById                  \n" +
                 $"                  5-GetAll Products                 12-GetAll Buyers                   19-GetAll Salers                 \n" +
                 $"                                                    13-BuyProductForBuyer              20-BuyProductForSaler            \n" +
-                $"                                                    21-SalerSaleProductForBuyer        22-SaleProduct                   \n " +
+                $"                                                                                       21-SalerSaleProductForBuyer      \n " +
                 $"                                                                                                                                                                            0-Quit                                                             \n"
 
 
@@ -65,8 +65,7 @@ namespace Utilities
             GetSaler = 18,
             GetAllSalers = 19,
             BuyProductForSaler = 20,
-            SalerSaleProductForBuyer = 21,
-            SaleProduct = 22
+            SalerSaleProductForBuyer = 21
         }
     }
 }

@@ -72,33 +72,7 @@ namespace DataAccess.Repositories
             }
         }
 
-        //public List<Product> GetAllProducts(Predicate<Product> filter = null)
-        //{
-        //    try
-        //    {
-        //        return filter == null ? DataContext.Products : DataContext.Products.FindAll(filter);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
-
-        //public Saler AddProduct(Product product)
-        //{
-        //    try
-        //    {
-        //        Saler saler = DataContext.Salers.Find(s => s.Id == product.Id);
-        //        saler.Products = new List<Product>();
-        //        saler.Products.Add(product);
-        //        Notifications.Display(ConsoleColor.Green, ConsoleColor.DarkGreen, $"{product.Name} {saler.Name} terefinden elde edildi..");
-        //        return saler;
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
+      
 
         public bool BuyProductForSaler(Product product, int sylrId)
         {
@@ -126,7 +100,7 @@ namespace DataAccess.Repositories
                 throw;
             }
         }
-        public bool SaleProductForBuyer(int prdctId,int sylrId,int byrId)
+        public bool SaleProductForBuyer(int prdctId, int sylrId, int byrId)
         {
             try
             {
@@ -134,52 +108,24 @@ namespace DataAccess.Repositories
                 Saler saler = DataContext.Salers.Find(s => s.Id == sylrId);
                 Buyer newBuyer = DataContext.Buyers.Find(s => s.Id == byrId);
 
-                Product product = newBuyer.Products[prdctId];
+                Product product = saler.Products[prdctId];
                 product.Id = newBuyer.Products.Count;
+                int productNewPrice = product.Price + 2000;
+                Product product1 = new Product()
+                {
+                    Price = productNewPrice
+                };
+                newBuyer.Products.Add(product1);
                 saler.Products.Remove(product);
-                newBuyer.Products.Add(product);
+
+                Notifications.Display(ConsoleColor.Yellow, ConsoleColor.Black, $" {saler.Name} {product}-i {newBuyer} ucun ${productNewPrice} a satdi..");
                 return true;
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
-
-        public Saler SaleProduct(Product product)
-        {
-            try
-            {
-                {
-                    Saler saler = DataContext.Salers.Find(s => s.Id == product.Id);
-                    saler.Products = new List<Product>();
-                    saler.Products.Remove(product);
-                    Notifications.Display(ConsoleColor.Green, ConsoleColor.DarkGreen, $"{product.Name} {saler.Name} terefinden satildi..");
-                    return saler;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        public Saler AddBuyer(Buyer buyer)
-        {
-            try
-            {
-                {
-                    Saler saler = DataContext.Salers.Find(s => s.Id == buyer.Id);
-                    saler.Buyer = new List<Buyer>();
-                    saler.Buyer.Add(buyer);
-                    Notifications.Display(ConsoleColor.Green, ConsoleColor.DarkGreen, $"{buyer.Name} {saler.Name} in alicilari arasina qeyd olundu..");
-                    return saler;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+       
     }
 }
