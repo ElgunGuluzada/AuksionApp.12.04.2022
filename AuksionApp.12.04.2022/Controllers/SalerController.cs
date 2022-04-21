@@ -70,10 +70,8 @@ namespace AuksionApp._12._04._2022.Controllers
                 Notifications.Display(ConsoleColor.Black, ConsoleColor.White, " Choose Saler Id: ");
                 int id = TryMethods.TryParseMethod();
                 salerService.Delete(id);
-                
             }
         }
-
         public void GetSaler()
         {
             if (DataContext.Salers.Count <= 0)
@@ -87,7 +85,6 @@ namespace AuksionApp._12._04._2022.Controllers
                 salerService.GetOne(id);
             }
         }
-
         public void GetAllSalers()
         {
             foreach (var sylr in salerService.GetAll())
@@ -130,7 +127,6 @@ namespace AuksionApp._12._04._2022.Controllers
                 salerService.BuyProductForSaler(product);
             }
         } 
-
         public void SaleProductForBuyer()
         {
             BuyerController buyerController = new BuyerController();

@@ -159,6 +159,10 @@ namespace Business.Services
                 {
                     saler.Products[i].Id = i;
                 }
+                for (int i = 0; i < buyer.Products.Count; i++)
+                {
+                    buyer.Products[i].Id = i;
+                }
             }
         }
     }

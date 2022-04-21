@@ -35,10 +35,6 @@ namespace DataAccess.Repositories
             }
         }
 
-        /// <summary>
-        /// Bu Method ise dusduyunde butun alicilari tapir ve ekrana cap edir.
-        /// </summary>
-        /// <returns></returns>
         public List<Buyer> GetAll(Predicate<Buyer> filter = null)
         {
             try
@@ -50,7 +46,7 @@ namespace DataAccess.Repositories
                 throw;
             }
         }
-
+      
         public Buyer GetOne(Predicate<Buyer> filter = null)
         {
             try

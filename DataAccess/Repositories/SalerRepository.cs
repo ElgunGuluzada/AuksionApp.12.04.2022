@@ -108,18 +108,28 @@ namespace DataAccess.Repositories
                 Saler saler = DataContext.Salers.Find(s => s.Id == sylrId);
                 Buyer newBuyer = DataContext.Buyers.Find(s => s.Id == byrId);
 
-                Product product = saler.Products[prdctId];
-                product.Id = newBuyer.Products.Count;
-                int productNewPrice = product.Price + 2000;
-                Product product1 = new Product()
+                if (saler.Products.Count<=0)
                 {
-                    Price = productNewPrice
-                };
-                newBuyer.Products.Add(product1);
-                saler.Products.Remove(product);
+                    Notifications.Display(ConsoleColor.Red, ConsoleColor.White, "Saticida satiliq mehsul yoxdur.");
+                    return true;
+                }
+                else
+                {
+                    Product product = saler.Products[prdctId];
+                    product.Id = newBuyer.Products.Count;
+                    int productNewPrice = product.Price + 2000;
+                    Product product1 = new Product()
+                    {
+                        Name = product.Name,
+                        Price = productNewPrice
+                    };
+                    newBuyer.Products.Add(product1);
+                    saler.Products.Remove(product);
 
-                Notifications.Display(ConsoleColor.Yellow, ConsoleColor.Black, $" {saler.Name} {product}-i {newBuyer} ucun ${productNewPrice} a satdi..");
-                return true;
+                    Notifications.Display(ConsoleColor.Yellow, ConsoleColor.Black, $" Satis Ugurla Heyata Kecdi ..");
+                    return true;
+                }
+               
             }
             catch (Exception)
             {

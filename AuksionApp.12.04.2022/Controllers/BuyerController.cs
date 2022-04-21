@@ -27,7 +27,7 @@ namespace AuksionApp._12._04._2022.Controllers
             };
             Console.Clear();
             buyerService.Create(buyer);
-            Notifications.Display(ConsoleColor.Green, ConsoleColor.DarkGreen, $" The {buyer.Name} {buyer.SurName} ,{buyer.Age} ,  was Created  on {DateTime.Now}\n");
+            Notifications.Display(ConsoleColor.Green, ConsoleColor.White, $" The {buyer.Name} {buyer.SurName} ,{buyer.Age} ,  was Created  on {DateTime.Now}\n");
         }
         public void UpdateBuyer()
         {
@@ -72,7 +72,10 @@ namespace AuksionApp._12._04._2022.Controllers
                 buyerService.Delete(id);
             }
         }
-
+        /// <summary>
+        /// Bu Method ise dusduyunde id-e gor hemin alicini tapir ve ekrana cap edir.
+        /// </summary>
+        /// <returns></returns>
         public void GetBuyer()
         {
             if (DataContext.Buyers.Count <= 0)
@@ -87,6 +90,10 @@ namespace AuksionApp._12._04._2022.Controllers
             }
         }
 
+        /// <summary>
+        /// Bu Method ise dusduyunde butun alicilari tapir ve ekrana cap edir.
+        /// </summary>
+        /// <returns></returns>
         public void GetAllBuyers()
         {
             foreach (var byr in buyerService.GetAll())
@@ -103,7 +110,11 @@ namespace AuksionApp._12._04._2022.Controllers
                 }
             }
         }
-
+       
+        /// <summary>
+        /// Bu metod alici ucun mehsul almaq ucun isleyir.
+        /// </summary>
+        /// <returns></returns>
         public void BuyProductForBuyer()
         {
             if (DataContext.Buyers.Count <= 0)
