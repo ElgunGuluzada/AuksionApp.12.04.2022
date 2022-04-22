@@ -74,25 +74,14 @@ namespace DataAccess.Repositories
 
       
 
-        public bool BuyProductForSaler(Product product, int sylrId)
+        public bool BuyProductForSaler(int prdctId, int sylrId)
         {
             try
             {
                 Saler saler = DataContext.Salers.Find(s => s.Id == sylrId);
+                Product product = DataContext.Products.Find(p => p.Id == prdctId);
                 saler.Products.Add(product);
-                return true;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        public bool SaleProduct(Product product, int sylrId)
-        {
-            try
-            {
-                Saler saler = DataContext.Salers.Find(s => s.Id == sylrId);
-                saler.Products.Remove(product);
+                DataContext.Products.Remove(product);
                 return true;
             }
             catch (Exception)
@@ -104,7 +93,6 @@ namespace DataAccess.Repositories
         {
             try
             {
-
                 Saler saler = DataContext.Salers.Find(s => s.Id == sylrId);
                 Buyer newBuyer = DataContext.Buyers.Find(s => s.Id == byrId);
 
@@ -117,7 +105,7 @@ namespace DataAccess.Repositories
                 {
                     Product product = saler.Products[prdctId];
                     product.Id = newBuyer.Products.Count;
-                    int productNewPrice = product.Price + 2000;
+                    double productNewPrice = product.Price*0.1;
                     Product product1 = new Product()
                     {
                         Name = product.Name,

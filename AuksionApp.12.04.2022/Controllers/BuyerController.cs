@@ -98,10 +98,10 @@ namespace AuksionApp._12._04._2022.Controllers
         {
             foreach (var byr in buyerService.GetAll())
             {
-                Notifications.Display(ConsoleColor.DarkBlue, ConsoleColor.White, $"           Buyer Id: {byr.Id}\n" +
-                    $"           Buyer Name: {byr.Name}\n" +
-                    $"           Buyer SurName: {byr.SurName} \n" +
-                    $"           Buyer Age: {byr.Age}\n");
+                Notifications.Display(ConsoleColor.DarkBlue, ConsoleColor.White, $"          Buyer Id: {byr.Id}\n" +
+                    $"          Buyer Name: {byr.Name}\n" +
+                    $"          Buyer SurName: {byr.SurName} \n" +
+                    $"          Buyer Age: {byr.Age}\n");
                 foreach (var prdct in byr.Products)
                 {
                     Notifications.Display(ConsoleColor.DarkBlue, ConsoleColor.White, $"           Product Id: {prdct.Id}\n" +

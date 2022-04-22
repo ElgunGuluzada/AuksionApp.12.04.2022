@@ -23,8 +23,28 @@ namespace Utilities.Helper
                 Notifications.Display(ConsoleColor.Red, ConsoleColor.DarkRed, "Enter the correctly");
                 goto TRY;
             }
-
         }
+
+        /// <summary>
+        /// Duzgun formada double qeyd olunana qeder dongu bas verir
+        /// </summary>
+        /// <returns></returns>
+        public static double TryDoubleMethod()
+        {
+        TRY: string dbl = Console.ReadLine();
+            double input;
+            bool isNum = double.TryParse(dbl,out input); 
+            if (isNum)
+            {
+                return input;
+            }
+            else
+            {
+                Notifications.Display(ConsoleColor.Red, ConsoleColor.DarkRed, "Enter the correctly");
+                goto TRY;
+            }
+        }
+
         /// <summary>
         /// ReadLine-dan gelen stringin bos ve ya null olmasinin qarsisini alir.Duz gun formada yazilana qeder dongu davam edir.
         /// </summary>
@@ -40,5 +60,6 @@ namespace Utilities.Helper
             }
             return word;
         }
+
     }
 }

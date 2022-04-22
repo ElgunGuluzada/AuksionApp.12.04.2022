@@ -1,4 +1,5 @@
 ﻿using Entities.Interface;
+using System;
 using System.Collections.Generic;
 
 namespace AuksionApp._12._04._2022
@@ -11,6 +12,8 @@ namespace AuksionApp._12._04._2022
         public int SalerId { get; set; }
         public int BuyerId { get; set; }
 
+        public DateTime ReleasedTime { get; set; }
+
         private string _name;
 
         public string Name
@@ -19,9 +22,9 @@ namespace AuksionApp._12._04._2022
             set { _name = value; }
         }
 
-        private int _price;
+        private double _price;
 
-        public int Price
+        public double Price
         {
             get { return _price; }
             set { _price = value; }

@@ -31,7 +31,6 @@ namespace Business.Services
             _salerRepository.Create(saler);
             return saler;
         }
-
         public Saler Delete(int id)
         {
             Saler isExist = _salerRepository.GetOne(p => p.Id == id);
@@ -114,24 +113,31 @@ namespace Business.Services
                 _salerRepository.Update(saler);
                 return isExist;
             }
-
         }
 
-        public Product BuyProductForSaler(Product product)
+        public void BuyProductForSaler(int productId,int sylrId)
         {
-            Saler sylrFind = _salerRepository.GetOne(s => s.Id == product.SalerId);
+            Saler sylrFind = _salerRepository.GetOne(s => s.Id == sylrId);
+            Product product = DataContext.Products.Find(p => p.Id == productId);
 
-            if (sylrFind == null)
+            //sylrFind.PurchaseDate = DateTime.Now;
+            if (sylrFind == null || product == null)
             {
                 Notifications.Display(ConsoleColor.White, ConsoleColor.DarkRed, " Id does not exist. \n Please Try Again!\n");
-                return null;
             }
             else
             {
                 product.Id = sylrFind.Products.Count;
-                _salerRepository.BuyProductForSaler(product, product.SalerId);
-                Notifications.Display(ConsoleColor.White, ConsoleColor.DarkGreen, $" The {product.Name} Purchased By {sylrFind.Name} ");
-                return product;
+                _salerRepository.BuyProductForSaler(productId, product.SalerId);
+                for (int i = 0; i < sylrFind.Products.Count; i++)
+                {
+                    sylrFind.Products[i].Id = i;
+                }
+                for (int i = 0; i < DataContext.Products.Count; i++)
+                {
+                    DataContext.Products[i].Id = i;
+                }
+                Notifications.Display(ConsoleColor.White, ConsoleColor.DarkGreen, $" The {product.Name} Purchased By {sylrFind.Name} on {sylrFind.PurchaseDate} ");
             }
         }
        
@@ -141,14 +147,13 @@ namespace Business.Services
             {
                 Notifications.Display(ConsoleColor.Red, ConsoleColor.White, "This Saled is Failed.");
             }
-            //uyerRepository buyerRepository = new BuyerRepository();
             Saler saler = _salerRepository.GetOne(s => s.Id == sylrId);
             Buyer buyer =DataContext.Buyers.Find(b => b.Id ==byrId);
            
 
-            if (saler == null || buyer == null)
+            if (buyer == null)
             {
-                Notifications.Display(ConsoleColor.Red, ConsoleColor.White, "ErroR");           
+                Notifications.Display(ConsoleColor.Red, ConsoleColor.White, "Create Buyer\n Please Write 8");           
             }
 
             else

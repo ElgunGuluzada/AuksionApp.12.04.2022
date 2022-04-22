@@ -14,16 +14,18 @@ namespace AuksionApp._12._04._2022.Controllers
             Notifications.Display(ConsoleColor.Cyan, ConsoleColor.DarkCyan, "Enter to Product Name: ");
             string name = TryMethods.TryNullOrEmptyMethod();
             Notifications.Display(ConsoleColor.Cyan, ConsoleColor.DarkCyan, "Enter to Product Price: ");
-            int price = TryMethods.TryParseMethod();
+            double price = TryMethods.TryDoubleMethod();
 
             Product product = new Product()
             {
+                Id = DataContext.Products.Count,
                 Name = name,
-                Price = price
+                Price = price,
+                ReleasedTime = DateTime.Now
             };
             Console.Clear();
             productService.Create(product);
-            Notifications.Display(ConsoleColor.White, ConsoleColor.DarkGreen, $" The {product.Name} went on sale for ${product.Price} on {DateTime.Now}\n");
+            Notifications.Display(ConsoleColor.White, ConsoleColor.DarkGreen, $" The {product.Name} went on sale for ${product.Price} on {product.ReleasedTime}\n");
         }
         public void UpdateProduct()
         {
@@ -40,7 +42,7 @@ namespace AuksionApp._12._04._2022.Controllers
                 Notifications.Display(ConsoleColor.DarkBlue, ConsoleColor.White, $" Enter new Name for Product");
                 string newName = TryMethods.TryNullOrEmptyMethod();
                 Notifications.Display(ConsoleColor.DarkBlue, ConsoleColor.White, $" Enter new Price for Product");
-                int newPrice = TryMethods.TryParseMethod();
+                double newPrice = TryMethods.TryDoubleMethod();
                 Product product = new Product()
                 {
                     Name = newName,
@@ -82,11 +84,12 @@ namespace AuksionApp._12._04._2022.Controllers
 
         public void GetAllProducts()
         {
-            foreach (var item in productService.GetAll())
+            foreach (var prdct in productService.GetAll())
             {
-                Notifications.Display(ConsoleColor.DarkBlue, ConsoleColor.White, $" Product Id: {item.Id}\n" +
-                    $" Product Name: {item.Name}\n" +
-                    $" Product Price: {item.Price}\n");
+                Notifications.Display(ConsoleColor.DarkBlue, ConsoleColor.White, $" Product Id: {prdct.Id}\n" +
+                    $" Product Name: {prdct.Name}\n" +
+                    $" Product Price: {prdct.Price}\n" +
+                    $" Product Released Time: {prdct.ReleasedTime}\n");
             }
         }
     }

@@ -95,10 +95,10 @@ namespace Business.Services
             else
             {
                 string oldName = isExist.Name;
-                int oldPrice = isExist.Price;
+                double oldPrice = isExist.Price;
 
                 string newName = product.Name;
-                int newPrice = product.Price;
+                double newPrice = product.Price;
 
                 if (oldPrice < newPrice)
                 {

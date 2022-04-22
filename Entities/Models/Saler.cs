@@ -1,4 +1,5 @@
 ﻿using Entities.Interface;
+using System;
 using System.Collections.Generic;
 
 namespace AuksionApp._12._04._2022
@@ -28,7 +29,9 @@ namespace AuksionApp._12._04._2022
             get { return _age; }
             set { _age = value; }
         }
-
+        public DateTime SalesDate { get; set; }
+        public DateTime PurchaseDate { get; set; }
+        
         List<Buyer> _buyers;
         public List<Buyer> Buyer { 
             get { return _buyers; } 
